@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAAL — Chie Umbra | Official</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Source+Serif+4:ital,wght@0,400;1,400&family=Geist:wght@500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface': '#131313',
+            'surface-dim': '#131313',
+            'surface-bright': '#3a3939',
+            'surface-container-lowest': '#0e0e0e',
+            'surface-container-low': '#1c1b1b',
+            'surface-container': '#201f1f',
+            'surface-container-high': '#2a2a2a',
+            'surface-container-highest': '#353534',
+            'on-surface': '#e5e2e1',
+            'on-surface-variant': '#e3beb8',
+            'inverse-surface': '#e5e2e1',
+            'inverse-on-surface': '#313030',
+            'outline': '#aa8984',
+            'outline-variant': '#5a403c',
+            'surface-tint': '#ffb4a8',
+            'primary': '#ffb4a8',
+            'on-primary': '#690000',
+            'primary-container': '#8b0000',
+            'on-primary-container': '#ff907f',
+            'inverse-primary': '#b52619',
+            'secondary': '#e6c364',
+            'on-secondary': '#3d2e00',
+            'secondary-container': '#785d00',
+            'on-secondary-container': '#fdd977',
+            'tertiary': '#cdc6b6',
+            'on-tertiary': '#343025',
+            'tertiary-container': '#464236',
+            'on-tertiary-container': '#b5ae9f',
+            'error': '#ffb4ab',
+            'on-error': '#690005',
+            'error-container': '#93000a',
+            'on-error-container': '#ffdad6',
+            'background': '#131313',
+            'on-background': '#e5e2e1',
+            'surface-variant': '#353534',
+          },
+          fontFamily: {
+            'headline': ['Anton', 'sans-serif'],
+            'body': ['"Source Serif 4"', 'serif'],
+            'label': ['Geist', 'sans-serif'],
+          },
+          spacing: {
+            'unit': '4px',
+            'gutter': '16px',
+            'margin-mobile': '24px',
+            'margin-desktop': '64px',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { background: #131313; }
+    .font-display-lg { font-family: Anton, sans-serif; font-size: 84px; font-weight: 400; line-height: 90%; letter-spacing: 0.1em; }
+    .font-headline-lg { font-family: Anton, sans-serif; font-size: 48px; font-weight: 400; line-height: 100%; letter-spacing: 0.05em; }
+    .font-headline-md { font-family: Anton, sans-serif; font-size: 32px; font-weight: 400; line-height: 110%; letter-spacing: 0.05em; }
+    .font-body-lg { font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 400; line-height: 160%; }
+    .font-body-md { font-family: 'Source Serif 4', serif; font-size: 16px; font-weight: 400; line-height: 160%; }
+    .font-label-md { font-family: Geist, sans-serif; font-size: 12px; font-weight: 500; line-height: 120%; letter-spacing: 0.2em; }
+    @media (max-width: 768px) {
+      .font-display-lg { font-size: 48px; }
+      .font-headline-lg { font-size: 36px; }
+    }
+    a { transition: opacity 0.15s; }
+    a:hover { opacity: 0.8; }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-background/95 backdrop-blur-sm border-b border-outline-variant">
+    <div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop py-4">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/logo-baal-blanco.png" alt="BAAL" class="h-10 md:h-12 object-contain">
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-headline-md text-headline-md text-on-surface uppercase tracking-widest border-b-2 border-primary pb-1">Home</a>
+        <a href="album.html" class="font-headline-md text-headline-md text-on-surface-variant uppercase tracking-widest hover:text-on-surface">Chie Umbra</a>
+        <a href="galeria.html" class="font-headline-md text-headline-md text-on-surface-variant uppercase tracking-widest hover:text-on-surface">Galería</a>
+        <a href="banda.html" class="font-headline-md text-headline-md text-on-surface-variant uppercase tracking-widest hover:text-on-surface">Banda</a>
+      </div>
+      <button id="menuBtn" class="md:hidden text-on-surface">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-margin-mobile pb-4 space-y-3">
+      <a href="index.html" class="block font-headline-md text-headline-md text-primary uppercase tracking-widest">Home</a>
+      <a href="album.html" class="block font-headline-md text-headline-md text-on-surface-variant uppercase tracking-widest">Chie Umbra</a>
+      <a href="galeria.html" class="block font-headline-md text-headline-md text-on-surface-variant uppercase tracking-widest">Galería</a>
+      <a href="banda.html" class="block font-headline-md text-headline-md text-on-surface-variant uppercase tracking-widest">Banda</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <img src="images/inm-13-hero-drummer.png" alt="BAAL Hero" class="absolute inset-0 w-full h-full object-cover opacity-40">
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+    <div class="relative z-10 text-center px-margin-mobile md:px-margin-desktop pt-24">
+      <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-6">Del abismo colombiano</span>
+      <h1 class="font-display-lg text-on-surface uppercase mb-6">BAAL</h1>
+      <p class="font-headline-lg text-headline-lg text-on-surface-variant uppercase tracking-widest mb-8">Chie Umbra</p>
+      <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12">Black metal ritual from the depths of Muisca mythology. Sound as weapon, silence as oath.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="album.html" class="inline-block bg-primary-container text-on-primary-container px-8 py-4 font-label-md text-label-md uppercase tracking-widest border-2 border-primary-container hover:bg-primary hover:text-on-primary transition-colors">ESCUCHAR AHORA</a>
+        <a href="galeria.html" class="inline-block border-2 border-outline text-on-surface px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-on-surface hover:text-background transition-colors">GALERÍA</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube Video Section -->
+  <section class="relative py-24 px-margin-mobile md:px-margin-desktop bg-surface">
+    <div class="max-w-4xl mx-auto text-center mb-12">
+      <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">VIDEO</span>
+      <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">CHIE UMBRA — OFFICIAL</h2>
+      <p class="font-body-lg text-on-surface-variant mt-4 italic">Del abismo, el sonido que no perdona</p>
+    </div>
+    <div class="max-w-4xl mx-auto aspect-video">
+      <iframe class="w-full h-full" src="https://www.youtube.com/embed/7uQvfM4pwpA?rel=0&modestbranding=1" title="BAAL — Chie Umbra" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- Lyrics / Cinematic Section -->
+  <section class="relative py-24 px-margin-mobile md:px-margin-desktop overflow-hidden">
+    <img src="images/inm-24-cinematic.png" alt="Cinematic atmosphere" class="absolute inset-0 w-full h-full object-cover opacity-20">
+    <div class="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background"></div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-6">LÍRICAS</span>
+      <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest mb-8">EL SONIDO DEL ABISMO</h2>
+      <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto italic">"Desde la raíz del mito, hacia la fractura del ser. Cada nota es una cicatriz abierta en el silencio."</p>
+      <div class="mt-12 border-t border-outline-variant pt-8">
+        <p class="font-body-lg text-on-surface-variant leading-relaxed">
+          Somos la voz que no pidió permiso.<br>
+          El eco de los que ya no tienen nombre.<br>
+          Chie Umbra no es un álbum — es un umbral.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Preview -->
+  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low">
+    <div class="text-center mb-16">
+      <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">CRÓNICAS</span>
+      <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">RITUALES VISUALES</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+      <a href="galeria.html" class="group overflow-hidden border-t-4 border-outline-variant hover:border-primary transition-colors">
+        <img src="images/inm-28-aggressive.png" alt="Aggressive ritual" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="p-4">
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">01</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Agresión</h3>
+        </div>
+      </a>
+      <a href="galeria.html" class="group overflow-hidden border-t-4 border-outline-variant hover:border-primary transition-colors">
+        <img src="images/inm-23-giger.png" alt="Biomechanical vision" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="p-4">
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">02</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Biomecánica</h3>
+        </div>
+      </a>
+      <a href="galeria.html" class="group overflow-hidden border-t-4 border-outline-variant hover:border-primary transition-colors">
+        <img src="images/inm-24-cinematic.png" alt="Cinematic darkness" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="p-4">
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">03</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Cinemático</h3>
+        </div>
+      </a>
+      <a href="galeria.html" class="group overflow-hidden border-t-4 border-outline-variant hover:border-primary transition-colors">
+        <img src="images/inm-32-eclipse.png" alt="Eclipse ritual" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="p-4">
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">04</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Eclipse</h3>
+        </div>
+      </a>
+      <a href="galeria.html" class="group overflow-hidden border-t-4 border-outline-variant hover:border-primary transition-colors">
+        <img src="images/inm-28-aggressive.png" alt="Aggressive intensity" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="p-4">
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">05</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Intensidad</h3>
+        </div>
+      </a>
+      <a href="galeria.html" class="group overflow-hidden border-t-4 border-outline-variant hover:border-primary transition-colors">
+        <img src="images/inm-23-giger.png" alt="Giger nightmare" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="p-4">
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">06</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Pesadilla</h3>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest border-t border-outline-variant">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <img src="images/logo-baal-blanco.png" alt="BAAL" class="h-8 object-contain">
+      <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">© 2026 BAAL — Todos los derechos reservados</p>
+      <div class="flex gap-6">
+        <a href="https://www.instagram.com/" class="text-on-surface-variant hover:text-primary" target="_blank" rel="noopener">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/" class="text-on-surface-variant hover:text-primary" target="_blank" rel="noopener">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="https://open.spotify.com/" class="text-on-surface-variant hover:text-primary" target="_blank" rel="noopener">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

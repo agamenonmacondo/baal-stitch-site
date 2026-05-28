@@ -1,0 +1,14 @@
+{
+  "name": "baal-chie-umbra",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BAAL — Chie Umbra | Official Website",
+  "scripts": {
+    "dev": "npx serve -s . -l 3000",
+    "build": "echo 'Static site - no build step required'",
+    "preview": "npx serve -s . -l 3000"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
