@@ -6,91 +6,81 @@
   <title>BAAL — Ritual de las 6 Puertas</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    html,body{width:100%;height:100%;overflow:hidden;background:#000;touch-action:none}
-    canvas{display:block;width:100%;height:100%}
+    html,body{width:100%;height:100%;overflow:hidden;background:#000;touch-action:none;font-family:system-ui,sans-serif;color:#e5e2e1}
+    canvas{display:block;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
 
-    /* OVERLAY / START */
-    #overlay{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
-    #overlay h1{font-family:system-ui,sans-serif;font-size:clamp(48px,15vw,100px);letter-spacing:.15em;color:#e5e2e1;line-height:1}
-    #overlay h2{font-family:system-ui,sans-serif;font-size:clamp(16px,4vw,32px);letter-spacing:.3em;color:#8b0000;text-transform:uppercase;margin-top:6px}
-    #overlay .sub{font-size:clamp(10px,2.5vw,13px);letter-spacing:.2em;color:#aa8984;text-transform:uppercase;margin-top:20px;max-width:320px;line-height:1.8}
-    .start-btn{margin-top:20px;padding:16px 48px;background:#8b0000;color:#e5e2e1;border:none;font-family:system-ui,sans-serif;font-size:clamp(16px,4vw,22px);letter-spacing:.2em;text-transform:uppercase;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    #overlay{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+    #overlay .tag{font-size:11px;letter-spacing:.25em;color:#aa8984;text-transform:uppercase;margin-bottom:12px}
+    #overlay h1{font-size:clamp(52px,16vw,110px);letter-spacing:.12em;color:#e5e2e1;line-height:.9;font-weight:900}
+    #overlay h2{font-size:clamp(16px,4vw,30px);letter-spacing:.25em;color:#8b0000;text-transform:uppercase;margin-top:8px}
+    #overlay .sub{font-size:clamp(10px,2.5vw,13px);letter-spacing:.15em;color:#aa8984;text-transform:uppercase;margin-top:18px;max-width:300px;line-height:1.8}
+    .start-btn{margin-top:22px;padding:16px 48px;background:#8b0000;color:#e5e2e1;border:none;font-size:clamp(16px,4vw,20px);letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+    .start-btn:active{background:#b52619}
+    #loadingMsg{font-size:12px;color:#8b0000;margin-top:12px;letter-spacing:.15em;display:none}
 
     /* HUD */
     #hud{position:fixed;inset:0;z-index:50;pointer-events:none;display:none}
     .hud-tl{position:fixed;top:8px;left:8px}
     .hud-tr{position:fixed;top:8px;right:8px;text-align:right}
-    .hud-bl{position:fixed;bottom:80px;left:8px}
-    .hud-br{position:fixed;bottom:80px;right:8px;text-align:right}
+    .hud-bl{position:fixed;bottom:90px;left:8px}
     .hud-bc{position:fixed;bottom:8px;left:50%;transform:translateX(-50%)}
-    .lvl-tag{font-family:system-ui;font-size:10px;letter-spacing:.25em;color:#aa8984;text-transform:uppercase}
-    .lvl-name{font-family:system-ui;font-size:clamp(14px,3.5vw,20px);letter-spacing:.1em;color:#e6c364;font-weight:700}
-    .timer{font-family:system-ui;font-size:clamp(11px,2.5vw,14px);font-variant-numeric:tabular-nums;color:#aa8984}
+    .hud-br{position:fixed;bottom:90px;right:8px;text-align:right}
+    .lvl-tag{font-size:10px;letter-spacing:.2em;color:#aa8984;text-transform:uppercase}
+    .lvl-name{font-size:clamp(14px,3.5vw,20px);letter-spacing:.08em;color:#e6c364;font-weight:700}
+    .timer{font-size:clamp(11px,2.5vw,14px);font-variant-numeric:tabular-nums;color:#aa8984}
     .prog-bar{width:80px;height:3px;background:#1c1b1b;border-radius:2px;margin-top:4px}
-    .prog-fill{height:100%;width:0%;background:#e6c364;border-radius:2px}
+    .prog-fill{height:100%;width:0%;background:#e6c364;border-radius:2px;transition:width .5s}
+    .hp-label{font-size:9px;letter-spacing:.2em;color:#5a403c;text-transform:uppercase}
     .hp-bar{width:clamp(100px,30vw,180px);height:5px;background:#1c1b1b;border-radius:3px;overflow:hidden}
     .hp-fill{height:100%;width:100%;background:linear-gradient(90deg,#8b0000,#ff3333);border-radius:3px;transition:width .3s}
-    .hp-label{font-size:9px;letter-spacing:.2em;color:#5a403c;text-transform:uppercase}
-    .kills{font-family:system-ui;font-size:clamp(18px,5vw,28px);color:#e6c364;font-weight:700}
+    .kills{font-size:clamp(20px,5vw,28px);color:#e6c364;font-weight:700}
     .kills-label{font-size:9px;letter-spacing:.2em;color:#5a403c;text-transform:uppercase}
-
-    /* Crosshair */
-    .crosshair{position:fixed;top:50%;left:50%;width:24px;height:24px;transform:translate(-50%,-50%);pointer-events:none}
-    .crosshair::before,.crosshair::after{content:'';position:absolute;background:rgba(200,0,0,.6)}
+    .crosshair{position:fixed;top:50%;left:50%;width:20px;height:20px;transform:translate(-50%,-50%);pointer-events:none;z-index:51}
+    .crosshair::before,.crosshair::after{content:'';position:absolute;background:rgba(200,0,0,.5)}
     .crosshair::before{width:2px;height:100%;left:50%;top:0;transform:translateX(-50%)}
     .crosshair::after{width:100%;height:2px;top:50%;left:0;transform:translateY(-50%)}
-
-    /* Muzzle flash */
-    .muzzle{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;background:radial-gradient(circle,rgba(255,200,50,.7),transparent);border-radius:50%;pointer-events:none;opacity:0;z-index:51}
-
-    /* Damage flash */
+    .muzzle{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;background:radial-gradient(circle,rgba(255,200,50,.7),transparent);border-radius:50%;pointer-events:none;opacity:0;z-index:52}
     .dmg-flash{position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(139,0,0,.5));pointer-events:none;opacity:0;z-index:49}
 
     /* LEVEL TRANSITION */
     #levelTrans{position:fixed;inset:0;z-index:200;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
-    #levelTrans h2{font-family:system-ui;font-size:clamp(36px,10vw,72px);letter-spacing:.15em;color:#8b0000;text-transform:uppercase}
-    #levelTrans .sub{font-family:system-ui;font-size:clamp(18px,5vw,36px);letter-spacing:.3em;color:#e6c364;text-transform:uppercase;margin-top:4px}
+    #levelTrans h2{font-size:clamp(36px,10vw,72px);letter-spacing:.12em;color:#8b0000;text-transform:uppercase;font-weight:900}
+    #levelTrans .sub{font-size:clamp(18px,5vw,36px);letter-spacing:.25em;color:#e6c364;text-transform:uppercase;margin-top:4px}
 
     /* VICTORY */
     #victory{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.95);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
-    #victory h1{font-family:system-ui;font-size:clamp(48px,14vw,100px);letter-spacing:.15em;color:#e5e2e1}
-    #victory .sub{font-family:system-ui;font-size:clamp(16px,4vw,32px);letter-spacing:.3em;color:#e6c364;text-transform:uppercase;margin-top:6px}
-    #victory .msg{font-size:12px;color:#aa8984;margin-top:20px;letter-spacing:.2em;text-transform:uppercase}
-    #victory a{margin-top:16px;padding:14px 40px;background:#8b0000;color:#e5e2e1;border:2px solid #8b0000;font-family:system-ui;font-size:16px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block}
+    #victory h1{font-size:clamp(52px,16vw,100px);letter-spacing:.12em;color:#e5e2e1;font-weight:900}
+    #victory .sub{font-size:clamp(16px,4vw,30px);letter-spacing:.25em;color:#e6c364;text-transform:uppercase;margin-top:6px}
+    #victory .msg{font-size:12px;color:#aa8984;margin-top:18px;letter-spacing:.2em;text-transform:uppercase}
+    #victory a{margin-top:18px;padding:14px 40px;background:#8b0000;color:#e5e2e1;border:2px solid #8b0000;font-size:16px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block}
 
     /* DEATH */
     #deathScreen{position:fixed;inset:0;z-index:250;background:rgba(60,0,0,.9);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
-    #deathScreen h2{font-family:system-ui;font-size:clamp(40px,12vw,64px);letter-spacing:.2em;color:#ff3333}
+    #deathScreen h2{font-size:clamp(40px,12vw,64px);letter-spacing:.2em;color:#ff3333;font-weight:900}
     #deathScreen .msg{font-size:13px;color:#aa8984;margin-top:8px;letter-spacing:.2em}
-    #deathScreen button{margin-top:16px;padding:14px 36px;background:transparent;color:#e5e2e1;border:2px solid #8b0000;font-family:system-ui;font-size:16px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+    #deathScreen button{margin-top:16px;padding:14px 36px;background:transparent;color:#e5e2e1;border:2px solid #8b0000;font-size:16px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
 
-    /* MOBILE JOYSTICK */
-    #joystickZone{position:fixed;bottom:20px;left:20px;width:120px;height:120px;z-index:60;touch-action:none}
-    #joystickBase{width:120px;height:120px;border-radius:50%;border:2px solid rgba(139,0,0,.4);background:rgba(139,0,0,.1);position:relative}
-    #joystickKnob{width:50px;height:50px;border-radius:50%;background:rgba(139,0,0,.5);border:2px solid rgba(139,0,0,.7);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
-
-    /* FIRE BUTTON */
-    #fireBtn{position:fixed;bottom:30px;right:24px;width:70px;height:70px;border-radius:50%;border:3px solid rgba(139,0,0,.6);background:rgba(139,0,0,.15);z-index:60;display:flex;align-items:center;justify-content:center;font-family:system-ui;font-size:10px;font-weight:700;color:#8b0000;letter-spacing:.1em;text-transform:uppercase;touch-action:none;-webkit-tap-highlight-color:transparent}
-    #fireBtn:active{background:rgba(139,0,0,.5);transform:scale(.95)}
-    #fireBtn.active{background:rgba(255,50,0,.4);border-color:rgba(255,50,0,.8)}
-
-    .desktop-only{display:none}
-    @media(min-width:769px){.desktop-only{display:block}.mobile-only{display:none!important}}
+    /* MOBILE CONTROLS */
+    #joystickZone{position:fixed;bottom:20px;left:20px;width:110px;height:110px;z-index:60;touch-action:none;display:none}
+    #joystickBase{width:110px;height:110px;border-radius:50%;border:2px solid rgba(139,0,0,.35);background:rgba(139,0,0,.08);position:relative}
+    #joystickKnob{width:44px;height:44px;border-radius:50%;background:rgba(139,0,0,.4);border:2px solid rgba(139,0,0,.6);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+    #fireBtn{position:fixed;bottom:28px;right:20px;width:64px;height:64px;border-radius:50%;border:3px solid rgba(139,0,0,.5);background:rgba(139,0,0,.12);z-index:60;display:none;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#8b0000;letter-spacing:.1em;text-transform:uppercase;touch-action:none;-webkit-tap-highlight-color:transparent}
+    #fireBtn:active,#fireBtn.active{background:rgba(255,50,0,.4);border-color:rgba(255,50,0,.7)}
+    .mobile-only{display:none}
+    @media(pointer:coarse){.mobile-only{display:flex!important}}
   </style>
 </head>
 <body>
 
-  <!-- Start Screen -->
   <div id="overlay">
-    <div class="lvl-tag">Chie Umbra — 2026</div>
+    <div class="tag">Chie Umbra — 2026</div>
     <h1>BAAL</h1>
     <h2>Ritual de las 6 Puertas</h2>
-    <div class="sub">Destruye a los enemigos. Sobrevive las 6 camaras. Cada Puerta dura lo que la cancion.</div>
-    <button class="start-btn" id="startBtn">ENTRAR AL RITUAL</button>
-    <div class="desktop-only" style="margin-top:16px;font-size:11px;color:#5a403c;letter-spacing:.15em">WASD — Mover | Mouse — Apuntar | Click — Disparar | Esc — Pausa</div>
+    <div class="sub">Destruye a los enemigos. Sobrevive las 6 camaras.<br>Cada Puerta dura lo que la cancion.</div>
+    <button class="start-btn" id="startBtn">ENTRAR</button>
+    <div id="loadingMsg">Cargando...</div>
   </div>
 
-  <!-- HUD -->
   <div id="hud">
     <div class="crosshair"></div>
     <div class="muzzle" id="muzzle"></div>
@@ -99,24 +89,16 @@
     <div class="hud-tr"><div class="timer" id="timer">0:00 / 1:24</div><div class="prog-bar"><div class="prog-fill" id="progBar"></div></div></div>
     <div class="hud-bl"><div class="hp-label">VIDA</div><div class="hp-bar"><div class="hp-fill" id="hpBar"></div></div></div>
     <div class="hud-br"><div class="kills" id="killsCount">0</div><div class="kills-label">MUERTES</div></div>
-    <div class="hud-bc" style="font-size:10px;color:#5a403c;letter-spacing:.1em"></div>
-    <!-- Mobile controls -->
     <div id="joystickZone" class="mobile-only"><div id="joystickBase"><div id="joystickKnob"></div></div></div>
     <div id="fireBtn" class="mobile-only">FIRE</div>
   </div>
 
-  <!-- Level Transition -->
   <div id="levelTrans"><h2 id="transTitle">PUERTA II</h2><div class="sub" id="transSub">INMUTABLE</div></div>
-
-  <!-- Victory -->
   <div id="victory"><h1>BAAL</h1><div class="sub">Has cruzado las 6 Puertas</div><div class="msg">Chie Umbra — El ritual se ha completado</div><a href="index.html">ESCUCHAR EL ALBUM</a></div>
-
-  <!-- Death -->
   <div id="deathScreen"><h2>MUERTE</h2><div class="msg">La sombra te ha consumido</div><button id="retryBtn">REINTENTAR</button></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// ===================== CONFIG =====================
 const LEVELS=[
   {name:'NOVA LUX',num:'I',dur:84.288,audio:'audio/nova-lux.mp3',fog:0x0a0800,fogD:.02,light:0xe6c364,lightI:1.2,wallTex:'images/inm-23-giger.png',ground:0x0a0800,sky:0x060500,enemyCol:0xccaa44,enemyGlow:0xffcc00},
   {name:'INMUTABLE',num:'II',dur:170.040,audio:'audio/inmutable.mp3',fog:0x130000,fogD:.025,light:0xff4444,lightI:1.0,wallTex:'images/inm-13-hero-drummer.png',ground:0x1a0000,sky:0x0a0000,enemyCol:0xff2222,enemyGlow:0xff0000},
@@ -126,143 +108,126 @@ const LEVELS=[
   {name:'ATLAS',num:'VI',dur:162.648,audio:'audio/atlas.mp3',fog:0x050818,fogD:.016,light:0x6688cc,lightI:1.0,wallTex:'images/inm-32-eclipse.png',ground:0x050810,sky:0x020510,enemyCol:0x4477bb,enemyGlow:0x6699ff}
 ];
 
-const W=18,MH=6,PH=1.65,SPD=7,LOOK=0.002,SHOOT_CD=0.18,BULLET_SPD=50,ENEMY_SPD=2.2,ENEMY_ATK_R=2.5,ENEMY_ATK_CD=1.8,ENEMY_HP=3,KILLS_NEEDED=6;
+const W=18,MH=5,PH=1.65,SPD=7,LOOK=0.002,SHOOT_CD=0.18,BULLET_SPD=50,ENEMY_SPD=2.2,ENEMY_ATK_R=2.5,ENEMY_ATK_CD=1.8,ENEMY_HP=3,KILLS_NEEDED=5;
 
-// ===================== STATE =====================
 let curLvl=0,playing=false,paused=false,won=false;
 let hp=100,kills=0,shootCD=0,lvlTime=0;
 let scene,cam,renderer,clock;
 let px=0,py=PH,pz=0,ry=0,rx=0;
 let keys={},walls=[],enemies=[],bullets=[];
 let torchLights=[],particleSys;
-let audioCtx,audioSrc,audioBuf,gainNode;
+let audioCtx,audioSrc,audioBufs={},gainNode,curAudioSrc;
 let isMobile='ontouchstart'in window||navigator.maxTouchPoints>1;
+let gameInited=false;
 
-// ===================== DOM =====================
 const $=id=>document.getElementById(id);
 
-// ===================== WEB AUDIO =====================
+// ===================== AUDIO =====================
 function initAudio(){
   if(audioCtx)return;
-  audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  gainNode=audioCtx.createGain();
-  gainNode.gain.value=0.6;
-  gainNode.connect(audioCtx.destination);
+  try{
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    gainNode=audioCtx.createGain();gainNode.gain.value=0.7;gainNode.connect(audioCtx.destination);
+    if(audioCtx.state==='suspended')audioCtx.resume();
+  }catch(e){console.warn('Audio init failed',e)}
 }
 
-async function playSong(src){
-  if(audioSrc){try{audioSrc.stop()}catch(e){}}
-  if(!audioBuf||audioBuf._src!==src){
-    const resp=await fetch(src);
-    const buf=await resp.arrayBuffer();
-    audioBuf=await audioCtx.decodeAudioData(buf);
-    audioBuf._src=src;
-  }
-  audioSrc=audioCtx.createBufferSource();
-  audioSrc.buffer=audioBuf;
-  audioSrc.loop=true;
-  audioSrc.connect(gainNode);
-  audioSrc.start(0);
-  if(audioCtx.state==='suspended')audioCtx.resume();
+async function playSong(url){
+  try{
+    if(curAudioSrc){try{curAudioSrc.stop()}catch(e){}curAudioSrc=null}
+    if(!audioCtx)initAudio();
+    if(audioCtx.state==='suspended')await audioCtx.resume();
+    if(!audioBufs[url]){
+      $('loadingMsg').style.display='block';
+      $('loadingMsg').textContent='Cargando musica...';
+      const resp=await fetch(url);
+      const buf=await resp.arrayBuffer();
+      audioBufs[url]=await audioCtx.decodeAudioData(buf);
+      $('loadingMsg').style.display='none';
+    }
+    curAudioSrc=audioCtx.createBufferSource();
+    curAudioSrc.buffer=audioBufs[url];
+    curAudioSrc.loop=true;
+    curAudioSrc.connect(gainNode);
+    curAudioSrc.start(0);
+  }catch(e){console.warn('Play failed',e)}
 }
 
-function stopSong(){
-  if(audioSrc){try{audioSrc.stop()}catch(e){}audioSrc=null}
-}
+function stopSong(){if(curAudioSrc){try{curAudioSrc.stop()}catch(e){}curAudioSrc=null}}
 
 // ===================== INIT =====================
 function init(){
-  scene=new THREE.Scene();
-  cam=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,.1,150);
-  renderer=new THREE.WebGLRenderer({antialias:!isMobile,powerPreference:'high-performance'});
-  renderer.setSize(innerWidth,innerHeight);
-  renderer.setPixelRatio(Math.min(devicePixelRatio,isMobile?1.5:2));
-  // No shadows on mobile — huge perf win
-  if(!isMobile){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap}
-  document.body.appendChild(renderer.domElement);
-  clock=new THREE.Clock();
+  try{
+    scene=new THREE.Scene();
+    cam=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,.1,120);
+    renderer=new THREE.WebGLRenderer({antialias:!isMobile,powerPreference:'high-performance'});
+    renderer.setSize(innerWidth,innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio,isMobile?1.5:2));
+    if(!isMobile){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap}
+    renderer.domElement.style.position='fixed';renderer.domElement.style.top='0';renderer.domElement.style.left='0';
+    document.body.appendChild(renderer.domElement);
+    clock=new THREE.Clock();
+  }catch(e){
+    $('overlay').innerHTML='<h1 style="color:#ff3333">ERROR</h1><p style="color:#aa8984;margin-top:16px;font-size:14px">'+e.message+'</p>';
+    return;
+  }
 
   addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
   document.addEventListener('keydown',e=>{keys[e.code]=true;if(e.code==='Escape')togglePause()});
   document.addEventListener('keyup',e=>keys[e.code]=false);
+
   if(!isMobile){
     document.addEventListener('mousemove',e=>{
-      if(!playing||paused)return;
-      if(document.pointerLockElement!==renderer.domElement)return;
-      ry-=e.movementX*LOOK;rx-=e.movementY*LOOK;
-      rx=Math.max(-1.3,Math.min(1.3,rx));
+      if(!playing||paused||document.pointerLockElement!==renderer.domElement)return;
+      ry-=e.movementX*LOOK;rx-=e.movementY*LOOK;rx=Math.max(-1.3,Math.min(1.3,rx));
     });
-    renderer.domElement.addEventListener('click',()=>{if(playing&&!paused&&document.pointerLockElement!==renderer.domElement)renderer.domElement.requestPointerLock()});
-    document.addEventListener('mousedown',()=>{if(playing&&!paused)shoot()});
+    renderer.domElement.addEventListener('click',()=>{
+      if(playing&&!paused)renderer.domElement.requestPointerLock();
+    });
+    document.addEventListener('mousedown',e=>{if(playing&&!paused&&e.button===0)shoot()});
   }
 
-  // Mobile joystick
   setupJoystick();
-  // Mobile fire
-  const fb=$('fireBtn');
-  let fireIv;
+
+  // Mobile fire button
+  const fb=$('fireBtn');let fireIv;
   fb.addEventListener('touchstart',e=>{e.preventDefault();shoot();fb.classList.add('active');fireIv=setInterval(shoot,200)},{passive:false});
   fb.addEventListener('touchend',e=>{e.preventDefault();clearInterval(fireIv);fb.classList.remove('active')},{passive:false});
   fb.addEventListener('touchcancel',()=>{clearInterval(fireIv);fb.classList.remove('active')});
 
-  // Mobile look via right-side canvas drag
+  // Mobile look (right side canvas drag)
   let lastTX=null,lastTY=null;
-  renderer.domElement.addEventListener('touchstart',e=>{for(const t of e.changedTouches){if(t.clientX>innerWidth*0.35){lastTX=t.clientX;lastTY=t.clientY}}},{passive:true});
+  renderer.domElement.addEventListener('touchstart',e=>{for(const t of e.changedTouches){if(t.clientX>innerWidth*.35){lastTX=t.clientX;lastTY=t.clientY}}},{passive:true});
   renderer.domElement.addEventListener('touchmove',e=>{
-    for(const t of e.changedTouches){
-      if(t.clientX>innerWidth*0.35&&lastTX!==null){
-        ry-=(t.clientX-lastTX)*0.005;
-        rx-=(t.clientY-lastTY)*0.005;
-        rx=Math.max(-1.3,Math.min(1.3,rx));
-        lastTX=t.clientX;lastTY=t.clientY;
-      }
-    }
+    for(const t of e.changedTouches){if(t.clientX>innerWidth*.35&&lastTX!==null){ry-=(t.clientX-lastTX)*.005;rx-=(t.clientY-lastTY)*.005;rx=Math.max(-1.3,Math.min(1.3,rx));lastTX=t.clientX;lastTY=t.clientY}}
   },{passive:true});
   renderer.domElement.addEventListener('touchend',()=>{lastTX=null;lastTY=null},{passive:true});
 
+  // Start button — both click and touch
   $('startBtn').addEventListener('click',startGame);
-  $('startBtn').addEventListener('touchend',e=>{e.preventDefault();startGame()},{passive:false});
   $('retryBtn').addEventListener('click',retryLevel);
-  $('retryBtn').addEventListener('touchend',e=>{e.preventDefault();retryLevel()},{passive:false});
+
+  gameInited=true;
 }
 
 // ===================== JOYSTICK =====================
 let joyX=0,joyY=0;
 function setupJoystick(){
   const zone=$('joystickZone'),base=$('joystickBase'),knob=$('joystickKnob');
-  let activeId=null;
-  const maxR=45;
-
-  zone.addEventListener('touchstart',e=>{
-    e.preventDefault();
-    const t=e.changedTouches[0];activeId=t.identifier;
-  },{passive:false});
-
+  let activeId=null;const maxR=38;
+  zone.addEventListener('touchstart',e=>{e.preventDefault();activeId=e.changedTouches[0].identifier},{passive:false});
   zone.addEventListener('touchmove',e=>{
     e.preventDefault();
-    for(const t of e.changedTouches){
-      if(t.identifier===activeId){
-        const rect=base.getBoundingClientRect();
-        const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
-        let dx=t.clientX-cx,dy=t.clientY-cy;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist>maxR){dx=dx/dist*maxR;dy=dy/dist*maxR}
-        knob.style.transform=`translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
-        joyX=dx/maxR;joyY=dy/maxR;
-      }
-    }
+    for(const t of e.changedTouches){if(t.identifier===activeId){
+      const rect=base.getBoundingClientRect();const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
+      let dx=t.clientX-cx,dy=t.clientY-cy;const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist>maxR){dx=dx/dist*maxR;dy=dy/dist*maxR}
+      knob.style.transform=`translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+      joyX=dx/maxR;joyY=dy/maxR;
+    }}
   },{passive:false});
-
-  const endTouch=e=>{
-    for(const t of e.changedTouches){
-      if(t.identifier===activeId){
-        activeId=null;joyX=0;joyY=0;
-        knob.style.transform='translate(-50%, -50%)';
-      }
-    }
-  };
-  zone.addEventListener('touchend',endTouch);
-  zone.addEventListener('touchcancel',endTouch);
+  const end=e=>{for(const t of e.changedTouches){if(t.identifier===activeId){activeId=null;joyX=0;joyY=0;knob.style.transform='translate(-50%,-50%)'}}}
+  zone.addEventListener('touchend',end);zone.addEventListener('touchcancel',end);
 }
 
 // ===================== MAZE =====================
@@ -271,13 +236,11 @@ function genMaze(w,h){
   const vis=Array.from({length:h},()=>Array(w).fill(false));
   function carve(cx,cy){
     vis[cy][cx]=true;g[cy*2+1][cx*2+1]=0;
-    for(const[dx,dy]of[[0,-1],[0,1],[-1,0],[1,0]].sort(()=>Math.random()-.5)){
-      const nx=cx+dx,ny=cy+dy;
-      if(nx>=0&&nx<w&&ny>=0&&ny<h&&!vis[ny][nx]){g[cy*2+1+dy][cx*2+1+dx]=0;carve(nx,ny)}
-    }
+    const dirs=[[0,-1],[0,1],[-1,0],[1,0]].sort(()=>Math.random()-.5);
+    for(const[dx,dy]of dirs){const nx=cx+dx,ny=cy+dy;if(nx>=0&&nx<w&&ny>=0&&ny<h&&!vis[ny][nx]){g[cy*2+1+dy][cx*2+1+dx]=0;carve(nx,ny)}}
   }
   carve(0,0);
-  for(let i=0;i<w*h*.12;i++){const rx=1+Math.floor(Math.random()*(w*2-1));const ry2=1+Math.floor(Math.random()*(h*2-1));g[ry2][rx]=0}
+  for(let i=0;i<Math.floor(w*h*.12);i++){const rx=1+Math.floor(Math.random()*(w*2-1));const ry=1+Math.floor(Math.random()*(h*2-1));g[ry][rx]=0}
   g[1][1]=0;g[h*2-1][w*2-1]=0;
   return g;
 }
@@ -285,7 +248,7 @@ function genMaze(w,h){
 // ===================== LOAD LEVEL =====================
 function loadLevel(idx){
   const lv=LEVELS[idx];
-  while(scene.children.length)scene.remove(scene.children[0]);
+  while(scene.children.length>0)scene.remove(scene.children[0]);
   walls=[];enemies=[];bullets=[];torchLights=[];
   kills=0;hp=100;shootCD=0;lvlTime=0;
 
@@ -298,51 +261,38 @@ function loadLevel(idx){
   scene.fog=new THREE.FogExp2(lv.fog,lv.fogD);
   scene.background=new THREE.Color(lv.sky);
   scene.add(new THREE.AmbientLight(0x111111,.5));
-  scene.add(new THREE.HemisphereLight(lv.light,0x080808,.35));
+  scene.add(new THREE.HemisphereLight(lv.light,0x080808,.3));
 
   const maze=genMaze(MH,MH);
   const mw=maze[0].length,mh=maze.length;
 
-  // Wall texture — low res for mobile
   const wTex=new THREE.TextureLoader().load(lv.wallTex);
-  wTex.wrapS=wTex.wrapT=THREE.RepeatWrapping;wTex.repeat.set(1,1);
-  wTex.encoding=THREE.sRGBEncoding;
+  wTex.wrapS=wTex.wrapT=THREE.RepeatWrapping;
   const wallMat=new THREE.MeshStandardMaterial({map:wTex,roughness:.9,metalness:0,color:new THREE.Color(lv.light).multiplyScalar(.3)});
   const wallGeo=new THREE.BoxGeometry(W,W*.8,W);
 
-  // Floor & ceiling (single plane each — efficient)
   const floorGeo=new THREE.PlaneGeometry(mw*W,mh*W);
   const floorMat=new THREE.MeshStandardMaterial({color:lv.ground,roughness:.95});
   const floor=new THREE.Mesh(floorGeo,floorMat);floor.rotation.x=-Math.PI/2;floor.position.set(mw*W/2,0,mh*W/2);scene.add(floor);
   const ceil=new THREE.Mesh(floorGeo.clone(),new THREE.MeshStandardMaterial({color:0x060606,roughness:1}));ceil.rotation.x=Math.PI/2;ceil.position.set(mw*W/2,W*.8,mh*W/2);scene.add(ceil);
 
-  // Build walls — instanced for perf
-  let wallCount=0;
-  for(let z=0;z<mh;z++)for(let x=0;x<mw;x++)if(maze[z][x]===1)wallCount++;
-  // Just use individual meshes (simpler, fine for small maze)
   for(let z=0;z<mh;z++)for(let x=0;x<mw;x++)if(maze[z][x]===1){
-    const m=new THREE.Mesh(wallGeo,wallMat);
-    m.position.set(x*W+W/2,W*.4,z*W+W/2);
-    scene.add(m);
+    const m=new THREE.Mesh(wallGeo,wallMat);m.position.set(x*W+W/2,W*.4,z*W+W/2);scene.add(m);
     walls.push({x:x*W,z:z*W,w:W,d:W});
   }
 
-  // Torch lights — fewer on mobile
   const torchStep=isMobile?3:2;
   for(let z=0;z<mh;z+=torchStep)for(let x=0;x<mw;x+=torchStep)if(maze[z][x]===0){
-    const t=new THREE.PointLight(lv.light,lv.lightI*.5,W*2);
-    t.position.set(x*W+W/2,W*.6,z*W+W/2);
+    const t=new THREE.PointLight(lv.light,lv.lightI*.5,W*2.5);t.position.set(x*W+W/2,W*.6,z*W+W/2);
     if(!isMobile)t.castShadow=true;
     scene.add(t);torchLights.push(t);
   }
 
-  // Enemies
   const openCells=[];
   for(let z=2;z<mh-1;z++)for(let x=2;x<mw-1;x++)if(maze[z][x]===0){
     const dist=Math.sqrt((x-1)**2+(z-1)**2);
     if(dist>3)openCells.push({x,z});
   }
-  // shuffle
   for(let i=openCells.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[openCells[i],openCells[j]]=[openCells[j],openCells[i]]}
 
   const eGeo=new THREE.BoxGeometry(.7,1.5,.7);
@@ -352,38 +302,30 @@ function loadLevel(idx){
   for(let i=0;i<KILLS_NEEDED&&i<openCells.length;i++){
     const c=openCells[i];
     const mat=new THREE.MeshStandardMaterial({color:lv.enemyCol,emissive:lv.enemyGlow,emissiveIntensity:.4,roughness:.6,metalness:.2});
-    const body=new THREE.Mesh(eGeo,mat);
-    body.position.set(c.x*W+W/2,1.1,c.z*W+W/2);
-    scene.add(body);
+    const body=new THREE.Mesh(eGeo,mat);body.position.set(c.x*W+W/2,1.1,c.z*W+W/2);scene.add(body);
     const lEye=new THREE.Mesh(eyeGeo,eyeMat);lEye.position.set(-.14,.25,-.35);body.add(lEye);
     const rEye=new THREE.Mesh(eyeGeo,eyeMat);rEye.position.set(.14,.25,-.35);body.add(rEye);
-    // Small enemy glow
-    const eg=new THREE.PointLight(lv.enemyGlow,.2,4);eg.position.set(0,.3,0);body.add(eg);
+    const eg=new THREE.PointLight(lv.enemyGlow,.15,4);eg.position.set(0,.3,0);body.add(eg);
     enemies.push({mesh:body,hp:ENEMY_HP,lastAtk:0,speed:ENEMY_SPD+Math.random()*1.2,alive:true});
   }
 
-  // Particles — fewer on mobile
-  const pN=isMobile?60:150;
+  const pN=isMobile?40:120;
   const pGeo=new THREE.BufferGeometry();const pPos=new Float32Array(pN*3);
   for(let i=0;i<pN*3;i+=3){pPos[i]=Math.random()*mw*W;pPos[i+1]=Math.random()*W*.8;pPos[i+2]=Math.random()*mh*W}
   pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
-  particleSys=new THREE.Points(pGeo,new THREE.PointsMaterial({color:lv.enemyGlow,size:isMobile?.04:.06,transparent:true,opacity:isMobile?.3:.5}));
+  particleSys=new THREE.Points(pGeo,new THREE.PointsMaterial({color:lv.enemyGlow,size:isMobile?.03:.05,transparent:true,opacity:isMobile?.3:.5}));
   scene.add(particleSys);
 
-  // Player start
   px=W*1.5;pz=W*1.5;py=PH;ry=0;rx=0;
   cam.position.set(px,py,pz);
-
-  // Play music
-  playSong(lv.audio).catch(()=>{});
+  playSong(lv.audio).catch(e=>console.warn('Audio failed',e));
 }
 
 // ===================== SHOOT =====================
 function shoot(){
   if(shootCD>0||!playing||paused)return;
   shootCD=SHOOT_CD;
-  $('muzzle').style.opacity='1';
-  setTimeout(()=>$('muzzle').style.opacity='0',80);
+  $('muzzle').style.opacity='1';setTimeout(()=>$('muzzle').style.opacity='0',80);
   const dir=new THREE.Vector3(0,0,-1);dir.applyEuler(cam.rotation);
   const b=new THREE.Mesh(new THREE.SphereGeometry(.06,4,4),new THREE.MeshBasicMaterial({color:0xffcc00}));
   b.position.copy(cam.position);scene.add(b);
@@ -392,19 +334,15 @@ function shoot(){
 
 // ===================== ENEMY AI =====================
 function updateEnemies(dt){
-  enemies.forEach(e=>{
-    if(!e.alive)return;
+  for(const e of enemies){
+    if(!e.alive)continue;
     const dx=px-e.mesh.position.x,dz=pz-e.mesh.position.z;
     const dist=Math.sqrt(dx*dx+dz*dz);
     if(dist>ENEMY_ATK_R){
       const nx=dx/dist,nz=dz/dist;
-      // Simple wall avoidance: only move if not hitting wall
-      let nwx=e.mesh.position.x+nx*e.speed*dt;
-      let nwz=e.mesh.position.z+nz*e.speed*dt;
+      const nwx=e.mesh.position.x+nx*e.speed*dt,nwz=e.mesh.position.z+nz*e.speed*dt;
       let blocked=false;
-      for(const w of walls){
-        if(nwx>w.x&&nwx<w.x+w.w&&nwz>w.z&&nwz<w.z+w.d){blocked=true;break}
-      }
+      for(const w of walls){if(nwx>w.x&&nwx<w.x+w.w&&nwz>w.z&&nwz<w.z+w.d){blocked=true;break}}
       if(!blocked){e.mesh.position.x=nwx;e.mesh.position.z=nwz}
     }
     e.mesh.rotation.y=Math.atan2(dx,dz);
@@ -413,54 +351,37 @@ function updateEnemies(dt){
       const now=performance.now()/1000;
       if(now-e.lastAtk>ENEMY_ATK_CD){e.lastAtk=now;takeDamage(10)}
     }
-  });
+  }
 }
 
 function takeDamage(dmg){
-  hp=Math.max(0,hp-dmg);
-  $('hpBar').style.width=hp+'%';
-  $('dmgFlash').style.opacity='.5';
-  setTimeout(()=>$('dmgFlash').style.opacity='0',200);
-  // Vibrate on mobile
-  if(navigator.vibrate)navigator.vibrate(100);
+  hp=Math.max(0,hp-dmg);$('hpBar').style.width=hp+'%';
+  $('dmgFlash').style.opacity='.5';setTimeout(()=>$('dmgFlash').style.opacity='0',200);
+  if(navigator.vibrate)navigator.vibrate(80);
   if(hp<=0)die();
 }
 
-function die(){
-  playing=false;stopSong();
-  $('deathScreen').style.display='flex';
-  if(document.pointerLockElement)document.exitPointerLock();
-}
+function die(){playing=false;stopSong();$('deathScreen').style.display='flex';if(document.pointerLockElement)document.exitPointerLock()}
 
-function retryLevel(){
-  $('deathScreen').style.display='none';
-  loadLevel(curLvl);
-  playing=true;
-  if(!isMobile)renderer.domElement.requestPointerLock();
-  clock.getDelta();
-  animate();
-}
+function retryLevel(){$('deathScreen').style.display='none';loadLevel(curLvl);playing=true;clock.getDelta();if(!isMobile)renderer.domElement.requestPointerLock()}
 
 // ===================== UPDATE =====================
 function update(dt){
   if(!playing||paused)return;
   lvlTime+=dt;
 
-  // Movement
   let dx=0,dz=0;
-  if(isMobile){
-    dx=joyX*SPD*dt;dz=joyY*SPD*dt;
-  }else{
+  if(isMobile){dx=joyX*SPD*dt;dz=joyY*SPD*dt}
+  else{
     if(keys['KeyW']||keys['ArrowUp'])dz-=SPD*dt;
     if(keys['KeyS']||keys['ArrowDown'])dz+=SPD*dt;
     if(keys['KeyA']||keys['ArrowLeft'])dx-=SPD*dt;
     if(keys['KeyD']||keys['ArrowRight'])dx+=SPD*dt;
   }
-  const s=Math.sin(ry),c=Math.cos(ry);
-  const mx=dx*c-dz*s,mz=dx*s+dz*c;
+  const sinR=Math.sin(ry),cosR=Math.cos(ry);
+  const mx=dx*cosR-dz*sinR,mz=dx*sinR+dz*cosR;
   const nx=px+mx,nz=pz+mz;
-  const r=.4;
-  let canX=true,canZ=true;
+  const r=.4;let canX=true,canZ=true;
   for(const w of walls){
     if(nx+r>w.x&&nx-r<w.x+w.w&&pz+r>w.z&&pz-r<w.z+w.d)canX=false;
     if(px+r>w.x&&px-r<w.x+w.w&&nz+r>w.z&&nz-r<w.z+w.d)canZ=false;
@@ -471,38 +392,39 @@ function update(dt){
   if(shootCD>0)shootCD-=dt;
 
   // Bullets
-  bullets.forEach(b=>{
+  const deadBullets=[];
+  for(const b of bullets){
     b.mesh.position.addScaledVector(b.dir,BULLET_SPD*dt);b.life-=dt;
-    enemies.forEach(e=>{
-      if(!e.alive)return;
-      if(b.life>0&&b.mesh.position.distanceTo(e.mesh.position)<1.2){
-        e.hp--;b.life=0;scene.remove(b.mesh);
+    let hit=false;
+    for(const e of enemies){
+      if(!e.alive||b.life<=0)continue;
+      if(b.mesh.position.distanceTo(e.mesh.position)<1.2){
+        e.hp--;b.life=0;scene.remove(b.mesh);hit=true;
         e.mesh.material.emissiveIntensity=2;
         setTimeout(()=>{if(e.alive)e.mesh.material.emissiveIntensity=.4},100);
         if(e.hp<=0){
           e.alive=false;kills++;
           $('killsCount').textContent=kills;
-          const sink=setInterval(()=>{e.mesh.position.y-=.12;e.mesh.scale.multiplyScalar(.88);if(e.mesh.scale.x<.05){scene.remove(e.mesh);clearInterval(sink)}},25);
+          const body=e.mesh;const sI=setInterval(()=>{body.position.y-=.12;body.scale.multiplyScalar(.88);if(body.scale.x<.05){scene.remove(body);clearInterval(sI)}},25);
           if(kills>=KILLS_NEEDED)onLevelComplete();
         }
+        break;
       }
-    });
-  });
+    }
+    if(!hit&&b.life>0&&(b.mesh.position.y>15||b.mesh.position.y<-5))scene.remove(b.mesh);
+    if(b.life<=0&&!deadBullets.includes(b))deadBullets.push(b);
+  }
   bullets=bullets.filter(b=>b.life>0);
 
   updateEnemies(dt);
 
-  // Particles
   if(particleSys){
     const pos=particleSys.geometry.attributes.position.array;
     for(let i=1;i<pos.length;i+=3){pos[i]+=dt*.2;if(pos[i]>W*.8)pos[i]=0}
     particleSys.geometry.attributes.position.needsUpdate=true;
   }
+  for(const t of torchLights)t.intensity=t.intensity*.92+(Math.random()*.4+.5)*LEVELS[curLvl].lightI*.5*.08;
 
-  // Torch flicker
-  torchLights.forEach(t=>{t.intensity=t.intensity*.92+(Math.random()*.4+.5)*LEVELS[curLvl].lightI*.5*.08});
-
-  // HUD
   const lv=LEVELS[curLvl];
   $('progBar').style.width=(Math.min(lvlTime/lv.dur,1)*100)+'%';
   $('timer').textContent=fmtTime(lvlTime)+' / '+fmtTime(lv.dur);
@@ -510,7 +432,6 @@ function update(dt){
 
 function fmtTime(s){const m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec}
 
-// ===================== LEVEL COMPLETE =====================
 function onLevelComplete(){
   playing=false;stopSong();
   if(curLvl>=LEVELS.length-1){$('hud').style.display='none';$('victory').style.display='flex';won=true;return}
@@ -527,11 +448,9 @@ function togglePause(){
   else{if(!isMobile)renderer.domElement.requestPointerLock();playSong(LEVELS[curLvl].audio).catch(()=>{});clock.getDelta()}
 }
 
-// ===================== GAME LOOP =====================
-let rafId;
 function animate(){
   if(won)return;
-  rafId=requestAnimationFrame(animate);
+  requestAnimationFrame(animate);
   const dt=Math.min(clock.getDelta(),.1);
   update(dt);
   renderer.render(scene,cam);
