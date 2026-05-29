@@ -164,11 +164,13 @@ function init(){
     renderer.setSize(innerWidth,innerHeight);
     renderer.setPixelRatio(Math.min(devicePixelRatio,isMobile?1.5:2));
     if(!isMobile){renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap}
-    renderer.domElement.style.position='fixed';renderer.domElement.style.top='0';renderer.domElement.style.left='0';
+    renderer.domElement.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;display:block;';
     document.body.appendChild(renderer.domElement);
     clock=new THREE.Clock();
+    console.log('[BAAL] Three.js init OK, renderer:',renderer.domElement.width,'x',renderer.domElement.height);
   }catch(e){
-    $('overlay').innerHTML='<h1 style="color:#ff3333">ERROR</h1><p style="color:#aa8984;margin-top:16px;font-size:14px">'+e.message+'</p>';
+    console.error('[BAAL] Init failed:',e);
+    $('overlay').innerHTML='<h1 style="color:#ff3333;font-size:24px">ERROR</h1><p style="color:#aa8984;font-size:14px;margin-top:12px">'+e.message+'</p><p style="color:#666;font-size:12px;margin-top:8px">Prueba con Chrome o Safari actualizado</p>';
     return;
   }
 
@@ -457,16 +459,44 @@ function animate(){
 }
 
 function startGame(){
-  initAudio();
-  $('overlay').style.display='none';
-  $('hud').style.display='block';
-  playing=true;curLvl=0;
-  loadLevel(0);
-  if(!isMobile)renderer.domElement.requestPointerLock();
-  animate();
+  try{
+    initAudio();
+    $('overlay').style.display='none';
+    $('hud').style.display='block';
+    // Show mobile controls on touch devices
+    if(isMobile){$('joystickZone').style.display='block';$('fireBtn').style.display='flex'}
+    playing=true;curLvl=0;
+    loadLevel(0);
+    if(!isMobile)try{renderer.domElement.requestPointerLock()}catch(e){}
+    animate();
+  }catch(e){
+    alert('Error al iniciar: '+e.message);
+  }
 }
 
-init();
+// ===================== STARTUP =====================
+// Detect WebGL support first
+function checkWebGL(){
+  try{const c=document.createElement('canvas');return !!(c.getContext('webgl2')||c.getContext('webgl'))}catch(e){return false}
+}
+
+if(!checkWebGL()){
+  $('overlay').innerHTML='<h1 style="color:#ff3333;font-size:24px;margin-bottom:16px">WebGL no soportado</h1><p style="color:#aa8984;font-size:14px">Tu navegador no soporta WebGL. Intenta con Chrome o Safari actualizado.</p>';
+}else{
+  $('loadingMsg').style.display='block';
+  $('loadingMsg').textContent='Cargando Three.js...';
+  // Wait for Three.js to load
+  function waitForThree(){
+    if(typeof THREE!=='undefined'){
+      $('loadingMsg').textContent='';
+      $('loadingMsg').style.display='none';
+      init();
+    }else{
+      setTimeout(waitForThree,200);
+    }
+  }
+  waitForThree();
+}
 </script>
 </body>
 </html>
