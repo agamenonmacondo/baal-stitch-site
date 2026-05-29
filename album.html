@@ -13,53 +13,27 @@
       theme: {
         extend: {
           colors: {
-            'surface': '#131313',
-            'surface-dim': '#131313',
-            'surface-bright': '#3a3939',
-            'surface-container-lowest': '#0e0e0e',
-            'surface-container-low': '#1c1b1b',
-            'surface-container': '#201f1f',
-            'surface-container-high': '#2a2a2a',
-            'surface-container-highest': '#353534',
-            'on-surface': '#e5e2e1',
-            'on-surface-variant': '#e3beb8',
-            'inverse-surface': '#e5e2e1',
-            'inverse-on-surface': '#313030',
-            'outline': '#aa8984',
-            'outline-variant': '#5a403c',
-            'surface-tint': '#ffb4a8',
-            'primary': '#ffb4a8',
-            'on-primary': '#690000',
-            'primary-container': '#8b0000',
-            'on-primary-container': '#ff907f',
-            'inverse-primary': '#b52619',
-            'secondary': '#e6c364',
-            'on-secondary': '#3d2e00',
-            'secondary-container': '#785d00',
-            'on-secondary-container': '#fdd977',
-            'tertiary': '#cdc6b6',
-            'on-tertiary': '#343025',
-            'tertiary-container': '#464236',
-            'on-tertiary-container': '#b5ae9f',
-            'error': '#ffb4ab',
-            'on-error': '#690005',
-            'error-container': '#93000a',
-            'on-error-container': '#ffdad6',
-            'background': '#131313',
-            'on-background': '#e5e2e1',
-            'surface-variant': '#353534',
+            'surface': '#131313', 'surface-dim': '#131313', 'surface-bright': '#3a3939',
+            'surface-container-lowest': '#0e0e0e', 'surface-container-low': '#1c1b1b',
+            'surface-container': '#201f1f', 'surface-container-high': '#2a2a2a',
+            'surface-container-highest': '#353534', 'on-surface': '#e5e2e1',
+            'on-surface-variant': '#e3beb8', 'inverse-surface': '#e5e2e1',
+            'inverse-on-surface': '#313030', 'outline': '#aa8984', 'outline-variant': '#5a403c',
+            'surface-tint': '#ffb4a8', 'primary': '#ffb4a8', 'on-primary': '#690000',
+            'primary-container': '#8b0000', 'on-primary-container': '#ff907f',
+            'inverse-primary': '#b52619', 'secondary': '#e6c364', 'on-secondary': '#3d2e00',
+            'secondary-container': '#785d00', 'on-secondary-container': '#fdd977',
+            'tertiary': '#cdc6b6', 'on-tertiary': '#343025', 'tertiary-container': '#464236',
+            'on-tertiary-container': '#b5ae9f', 'error': '#ffb4ab', 'on-error': '#690005',
+            'error-container': '#93000a', 'on-error-container': '#ffdad6',
+            'background': '#131313', 'on-background': '#e5e2e1', 'surface-variant': '#353534',
           },
           fontFamily: {
             'headline': ['Anton', 'sans-serif'],
             'body': ['"Source Serif 4"', 'serif'],
             'label': ['Geist', 'sans-serif'],
           },
-          spacing: {
-            'unit': '4px',
-            'gutter': '16px',
-            'margin-mobile': '24px',
-            'margin-desktop': '64px',
-          },
+          spacing: { 'unit': '4px', 'gutter': '16px', 'margin-mobile': '24px', 'margin-desktop': '64px' },
         },
       },
     }
@@ -72,12 +46,9 @@
     .font-body-lg { font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 400; line-height: 160%; }
     .font-body-md { font-family: 'Source Serif 4', serif; font-size: 16px; font-weight: 400; line-height: 160%; }
     .font-label-md { font-family: Geist, sans-serif; font-size: 12px; font-weight: 500; line-height: 120%; letter-spacing: 0.2em; }
-    @media (max-width: 768px) {
-      .font-display-lg { font-size: 48px; }
-      .font-headline-lg { font-size: 36px; }
-    }
-    a { transition: opacity 0.15s; }
-    a:hover { opacity: 0.8; }
+    @media (max-width: 768px) { .font-display-lg { font-size: 48px; } .font-headline-lg { font-size: 36px; } }
+    a { transition: opacity 0.15s; } a:hover { opacity: 0.8; }
+    .track-highlight { background: rgba(139,0,0,0.15); border-left: 4px solid #8b0000; }
   </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen">
@@ -98,7 +69,6 @@
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
-    <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden md:hidden px-margin-mobile pb-4 space-y-3">
       <a href="index.html" class="block font-headline-md text-headline-md text-on-surface-variant uppercase tracking-widest">Home</a>
       <a href="album.html" class="block font-headline-md text-headline-md text-primary uppercase tracking-widest">Chie Umbra</a>
@@ -112,104 +82,144 @@
     <img src="images/inm-16-hero-split.png" alt="Chie Umbra Album" class="absolute inset-0 w-full h-full object-cover opacity-50">
     <div class="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent"></div>
     <div class="relative z-10 text-center px-margin-mobile md:px-margin-desktop pt-24">
-      <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-6">Álbum — 2025</span>
+      <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-6">Álbum — 2026</span>
       <h1 class="font-display-lg text-on-surface uppercase mb-4">CHIE UMBRA</h1>
-      <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">Nine tracks of ritual devastation. From the volcanic depths of Muisca mythology to the cold precision of black metal orthodoxy.</p>
+      <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">Seis canciones. Seis umbrales. Desde la raíz del mito Muisca hacia la fractura del ser.</p>
+    </div>
+  </section>
+
+  <!-- YouTube Player -->
+  <section class="py-16 px-margin-mobile md:px-margin-desktop bg-surface">
+    <div class="max-w-4xl mx-auto">
+      <div class="aspect-video border-2 border-outline-variant">
+        <iframe id="mainPlayer" class="w-full h-full" src="https://www.youtube.com/embed/7uQvfM4pwpA?rel=0&modestbranding=1" title="BAAL — Chie Umbra" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
   </section>
 
   <!-- Tracklist -->
-  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
+  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-dim">
     <div class="max-w-4xl mx-auto">
       <div class="mb-16">
         <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">TRACKLIST</span>
-        <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">LAS NUEVE PUERTAS</h2>
+        <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">LAS SEIS PUERTAS</h2>
       </div>
 
       <div class="space-y-0">
-        <!-- Track 1 -->
-        <div class="flex items-center justify-between py-4 border-b border-outline-variant group hover:bg-surface-container transition-colors px-4">
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors px-4 cursor-pointer" onclick="loadVideo('7uQvfM4pwpA')">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8">01</span>
-            <span class="font-headline-md text-headline-md text-on-surface uppercase">Invocación</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase">Nova Lux</span>
           </div>
-          <span class="font-label-md text-label-md text-on-surface-variant">4:32</span>
+          <svg class="w-5 h-5 text-primary-container" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 2 -->
-        <div class="flex items-center justify-between py-4 border-b border-outline-variant group hover:bg-surface-container transition-colors px-4">
+        <div class="flex items-center justify-between py-5 border-b border-[#8b0000] bg-[#8b0000]/10 hover:bg-[#8b0000]/20 transition-colors px-4 cursor-pointer track-highlight" onclick="loadVideo('7uQvfM4pwpA')">
           <div class="flex items-center gap-6">
-            <span class="font-label-md text-label-md text-secondary w-8">02</span>
-            <span class="font-headline-md text-headline-md text-on-surface uppercase">Chie Umbra</span>
+            <span class="font-label-md text-label-md w-8" style="color:#8b0000">02</span>
+            <span class="font-headline-md text-headline-md uppercase" style="color:#8b0000">Inmutable</span>
           </div>
-          <span class="font-label-md text-label-md text-on-surface-variant">5:17</span>
+          <svg class="w-5 h-5" style="color:#8b0000" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 3 -->
-        <div class="flex items-center justify-between py-4 border-b border-outline-variant group hover:bg-surface-container transition-colors px-4">
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors px-4 cursor-pointer" onclick="loadVideo('7uQvfM4pwpA')">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8">03</span>
-            <span class="font-headline-md text-headline-md text-on-surface uppercase">Jaguar Nocturno</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase">Chie Umbra</span>
           </div>
-          <span class="font-label-md text-label-md text-on-surface-variant">6:03</span>
+          <svg class="w-5 h-5 text-primary-container" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 4 -->
-        <div class="flex items-center justify-between py-4 border-b border-outline-variant group hover:bg-surface-container transition-colors px-4">
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors px-4 cursor-pointer" onclick="loadVideo('7uQvfM4pwpA')">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8">04</span>
-            <span class="font-headline-md text-headline-md text-on-surface uppercase">Templo de Sangre</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase">Hasta la Muerte Invicto</span>
           </div>
-          <span class="font-label-md text-label-md text-on-surface-variant">3:48</span>
+          <svg class="w-5 h-5 text-primary-container" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 5 -->
-        <div class="flex items-center justify-between py-4 border-b border-outline-variant group hover:bg-surface-container transition-colors px-4">
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors px-4 cursor-pointer" onclick="loadVideo('7uQvfM4pwpA')">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8">05</span>
-            <span class="font-headline-md text-headline-md text-on-surface uppercase">El Abismo</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase">Mil Pasos</span>
           </div>
-          <span class="font-label-md text-label-md text-on-surface-variant">7:21</span>
+          <svg class="w-5 h-5 text-primary-container" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 6 -->
-        <div class="flex items-center justify-between py-4 border-b border-outline-variant group hover:bg-surface-container transition-colors px-4">
+        <div class="flex items-center justify-between py-5 border-b-4 border-secondary hover:bg-surface-container transition-colors px-4 cursor-pointer" onclick="loadVideo('7uQvfM4pwpA')">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8">06</span>
-            <span class="font-headline-md text-headline-md text-on-surface uppercase">Obsidiana</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase">Atlas</span>
           </div>
-          <span class="font-label-md text-label-md text-on-surface-variant">4:56</span>
-        </div>
-        <!-- Track 7 -->
-        <div class="flex items-center justify-between py-4 border-b border-outline-variant group hover:bg-surface-container transition-colors px-4">
-          <div class="flex items-center gap-6">
-            <span class="font-label-md text-label-md text-secondary w-8">07</span>
-            <span class="font-headline-md text-headline-md text-on-surface uppercase">Ritual de Ceniza</span>
-          </div>
-          <span class="font-label-md text-label-md text-on-surface-variant">5:44</span>
-        </div>
-        <!-- Track 8 -->
-        <div class="flex items-center justify-between py-4 border-b border-outline-variant group hover:bg-surface-container transition-colors px-4">
-          <div class="flex items-center gap-6">
-            <span class="font-label-md text-label-md text-secondary w-8">08</span>
-            <span class="font-headline-md text-headline-md text-on-surface uppercase">Dioses Muertos</span>
-          </div>
-          <span class="font-label-md text-label-md text-on-surface-variant">6:15</span>
-        </div>
-        <!-- Track 9 -->
-        <div class="flex items-center justify-between py-4 border-b border-outline-variant group hover:bg-surface-container transition-colors px-4">
-          <div class="flex items-center gap-6">
-            <span class="font-label-md text-label-md text-secondary w-8">09</span>
-            <span class="font-headline-md text-headline-md text-on-surface uppercase">Última Puerta</span>
-          </div>
-          <span class="font-label-md text-label-md text-on-surface-variant">8:02</span>
+          <svg class="w-5 h-5 text-primary-container" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="mt-16 text-center">
-        <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-2">Duración total</p>
-        <p class="font-headline-lg text-headline-lg text-on-surface">52:38</p>
+  <!-- Discography -->
+  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">DISCOGRAFÍA</span>
+        <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">DISCOS ANTERIORES</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+        <a href="https://youtu.be/fB5dRlNZ0WY?si=vg1_uz6m65zF_fBl" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors">
+          <div class="aspect-square bg-surface-container flex items-center justify-center">
+            <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[80px]">IV</span>
+          </div>
+          <div class="p-4">
+            <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-1">2014</span>
+            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Emron</h3>
+            <p class="font-body-md text-on-surface-variant mt-1 text-sm">En Nombre de Baal</p>
+          </div>
+        </a>
+        <a href="https://youtu.be/rOWRXRrzGKA?si=2Uy5A14ZIKiwbom8" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors">
+          <div class="aspect-square bg-surface-container flex items-center justify-center">
+            <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[80px]">VI</span>
+          </div>
+          <div class="p-4">
+            <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-1">2016</span>
+            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Ícaro</h3>
+            <p class="font-body-md text-on-surface-variant mt-1 text-sm">En Nombre de Baal</p>
+          </div>
+        </a>
+        <a href="https://youtu.be/7B2t8qN57Nw?si=XEST7HTgGnVrWHm-" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors">
+          <div class="aspect-square bg-surface-container flex items-center justify-center">
+            <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[80px]">IX</span>
+          </div>
+          <div class="p-4">
+            <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-1">2019</span>
+            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Inmaculada</h3>
+            <p class="font-body-md text-on-surface-variant mt-1 text-sm">En Nombre de Baal</p>
+          </div>
+        </a>
+        <a href="https://youtu.be/EK9QesfSsmo?si=hoLedbrBkjyPGk6l" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors">
+          <div class="aspect-square bg-surface-container flex items-center justify-center">
+            <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[80px]">XX</span>
+          </div>
+          <div class="p-4">
+            <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-1">2022</span>
+            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Si no Vuelvo</h3>
+            <p class="font-body-md text-on-surface-variant mt-1 text-sm">En Nombre de Baal</p>
+          </div>
+        </a>
+      </div>
+      <div class="mt-6">
+        <a href="https://youtu.be/aHdI7w7_S7o?si=u0CUZVMaEyqqx2gm" target="_blank" rel="noopener" class="group block border-2 border-primary-container hover:bg-primary-container/10 transition-colors">
+          <div class="flex items-center">
+            <div class="w-24 h-24 bg-surface-container flex items-center justify-center shrink-0">
+              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[56px]">XXIV</span>
+            </div>
+            <div class="p-4">
+              <span class="font-label-md text-label-md text-primary-container uppercase tracking-widest block mb-1">2024 — ÚLTIMO</span>
+              <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Demonas</h3>
+              <p class="font-body-md text-on-surface-variant mt-1 text-sm">En Nombre de Baal</p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Album Concept -->
-  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container">
+  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
     <div class="max-w-4xl mx-auto">
       <div class="mb-12">
         <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">CONCEPTO</span>
@@ -217,7 +227,7 @@
       </div>
       <div class="grid md:grid-cols-2 gap-12">
         <div>
-          <p class="font-body-lg text-on-surface-variant mb-6">Chie Umbra es la manifestación sonora de un mito que se niega a morir. Nueve puertas se abren hacia el interior de la tierra colombiana, donde los dioses Muiscas esperan todavía.</p>
+          <p class="font-body-lg text-on-surface-variant mb-6">Chie Umbra es la manifestación sonora de un mito que se niega a morir. Seis puertas se abren hacia el interior de la tierra colombiana, donde los dioses Muiscas esperan todavía.</p>
           <p class="font-body-lg text-on-surface-variant mb-6">Cada track es un ritual, un paso hacia la oscuridad que todo lo contiene. No hay redención en estas canciones — solo la verdad desnuda del vacío.</p>
           <p class="font-body-lg text-on-surface-variant italic">"El sonido como arma, el silencio como juramento."</p>
         </div>
@@ -232,31 +242,9 @@
           </div>
           <div class="border-l-4 border-tertiary-container pl-4">
             <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-1">Año</span>
-            <p class="font-body-lg text-on-surface">2025</p>
+            <p class="font-body-lg text-on-surface">2026</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Listen Section -->
-  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
-    <div class="max-w-4xl mx-auto text-center">
-      <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">ESCUCHAR</span>
-      <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest mb-8">DISPONIBLE AHORA</h2>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="https://open.spotify.com" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-surface-container-high text-on-surface px-8 py-4 font-label-md text-label-md uppercase tracking-widest border-2 border-outline-variant hover:border-primary transition-colors">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          Spotify
-        </a>
-        <a href="https://music.youtube.com" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-surface-container-high text-on-surface px-8 py-4 font-label-md text-label-md uppercase tracking-widest border-2 border-outline-variant hover:border-primary transition-colors">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          YouTube Music
-        </a>
-        <a href="https://bandcamp.com" target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-surface-container-high text-on-surface px-8 py-4 font-label-md text-label-md uppercase tracking-widest border-2 border-outline-variant hover:border-primary transition-colors">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
-          Bandcamp
-        </a>
       </div>
     </div>
   </section>
@@ -265,7 +253,7 @@
   <footer class="py-12 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest border-t border-outline-variant">
     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
       <a href="index.html"><img src="images/logo-baal-blanco.png" alt="BAAL" class="h-8 object-contain"></a>
-      <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">© 2026 BAAL — Todos los derechos reservados</p>
+      <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">&copy; 2026 BAAL — Todos los derechos reservados</p>
       <div class="flex gap-6">
         <a href="https://www.instagram.com/" class="text-on-surface-variant hover:text-primary" target="_blank" rel="noopener">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -281,6 +269,11 @@
     document.getElementById('menuBtn').addEventListener('click', function() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     });
+    function loadVideo(videoId) {
+      var player = document.getElementById('mainPlayer');
+      player.src = 'https://www.youtube.com/embed/' + videoId + '?rel=0&modestbranding=1&autoplay=1';
+      player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   </script>
 </body>
 </html>

@@ -78,6 +78,9 @@
     }
     a { transition: opacity 0.15s; }
     a:hover { opacity: 0.8; }
+    .track-active { background: rgba(139,0,0,0.15); border-left: 4px solid #8b0000; }
+    .track-active .track-num { color: #8b0000; }
+    .track-active .track-name { color: #8b0000; font-weight: bold; }
   </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen">
@@ -117,44 +120,178 @@
       <p class="font-headline-lg text-headline-lg text-on-surface-variant uppercase tracking-widest mb-8">Chie Umbra</p>
       <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12">Black metal ritual from the depths of Muisca mythology. Sound as weapon, silence as oath.</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="album.html" class="inline-block bg-primary-container text-on-primary-container px-8 py-4 font-label-md text-label-md uppercase tracking-widest border-2 border-primary-container hover:bg-primary hover:text-on-primary transition-colors">ESCUCHAR AHORA</a>
+        <a href="#player" class="inline-block bg-primary-container text-on-primary-container px-8 py-4 font-label-md text-label-md uppercase tracking-widest border-2 border-primary-container hover:bg-primary hover:text-on-primary transition-colors">ESCUCHAR AHORA</a>
         <a href="galeria.html" class="inline-block border-2 border-outline text-on-surface px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-on-surface hover:text-background transition-colors">GALERÍA</a>
       </div>
     </div>
   </section>
 
-  <!-- YouTube Video Section -->
-  <section class="relative py-24 px-margin-mobile md:px-margin-desktop bg-surface">
-    <div class="max-w-4xl mx-auto text-center mb-12">
-      <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">VIDEO</span>
-      <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">CHIE UMBRA — OFFICIAL</h2>
-      <p class="font-body-lg text-on-surface-variant mt-4 italic">Del abismo, el sonido que no perdona</p>
-    </div>
-    <div class="max-w-4xl mx-auto aspect-video">
-      <iframe class="w-full h-full" src="https://www.youtube.com/embed/7uQvfM4pwpA?rel=0&modestbranding=1" title="BAAL — Chie Umbra" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <!-- YouTube Player Section -->
+  <section id="player" class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">CHIE UMBRA — 2026</span>
+        <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">REPRODUCTOR</h2>
+      </div>
+
+      <!-- Main Video Player -->
+      <div class="aspect-video mb-12 border-2 border-outline-variant">
+        <iframe id="mainPlayer" class="w-full h-full" src="https://www.youtube.com/embed/7uQvfM4pwpA?rel=0&modestbranding=1" title="BAAL — Chie Umbra" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <!-- Tracklist = Clickable YouTube links -->
+      <div class="mb-8">
+        <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-6">CANCIONES</span>
+      </div>
+      <div class="border-t border-outline-variant">
+        <!-- Track 1: Nova Lux -->
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Nova Lux')">
+          <div class="flex items-center gap-6">
+            <span class="font-label-md text-label-md text-secondary w-8 track-num">01</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Nova Lux</span>
+          </div>
+          <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <!-- Track 2: Inmutable -->
+        <div class="flex items-center justify-between py-5 border-b border-[#8b0000] bg-[#8b0000]/10 hover:bg-[#8b0000]/20 transition-colors cursor-pointer px-4 group track-active" onclick="loadVideo('7uQvfM4pwpA', 'Inmutable')">
+          <div class="flex items-center gap-6">
+            <span class="font-label-md text-label-md w-8 track-num">02</span>
+            <span class="font-headline-md text-headline-md uppercase track-name">Inmutable</span>
+          </div>
+          <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <!-- Track 3: Chie Umbra -->
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Chie Umbra')">
+          <div class="flex items-center gap-6">
+            <span class="font-label-md text-label-md text-secondary w-8 track-num">03</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Chie Umbra</span>
+          </div>
+          <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <!-- Track 4: Hasta la Muerte Invicto -->
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Hasta la Muerte Invicto')">
+          <div class="flex items-center gap-6">
+            <span class="font-label-md text-label-md text-secondary w-8 track-num">04</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Hasta la Muerte Invicto</span>
+          </div>
+          <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <!-- Track 5: Mil Pasos -->
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Mil Pasos')">
+          <div class="flex items-center gap-6">
+            <span class="font-label-md text-label-md text-secondary w-8 track-num">05</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Mil Pasos</span>
+          </div>
+          <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <!-- Track 6: Atlas -->
+        <div class="flex items-center justify-between py-5 border-b-4 border-secondary hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Atlas')">
+          <div class="flex items-center gap-6">
+            <span class="font-label-md text-label-md text-secondary w-8 track-num">06</span>
+            <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Atlas</span>
+          </div>
+          <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+
+      <p class="font-body-lg text-on-surface-variant text-center mt-8 italic">Toca una canción para reproducir el video oficial</p>
     </div>
   </section>
 
-  <!-- Lyrics / Cinematic Section -->
-  <section class="relative py-24 px-margin-mobile md:px-margin-desktop overflow-hidden">
-    <img src="images/inm-24-cinematic.png" alt="Cinematic atmosphere" class="absolute inset-0 w-full h-full object-cover opacity-20">
-    <div class="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background"></div>
-    <div class="relative z-10 max-w-4xl mx-auto text-center">
-      <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-6">LÍRICAS</span>
-      <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest mb-8">EL SONIDO DEL ABISMO</h2>
-      <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto italic">"Desde la raíz del mito, hacia la fractura del ser. Cada nota es una cicatriz abierta en el silencio."</p>
-      <div class="mt-12 border-t border-outline-variant pt-8">
-        <p class="font-body-lg text-on-surface-variant leading-relaxed">
-          Somos la voz que no pidió permiso.<br>
-          El eco de los que ya no tienen nombre.<br>
-          Chie Umbra no es un álbum — es un umbral.
-        </p>
+  <!-- Other Albums / Discography -->
+  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">DISCOGRAFÍA</span>
+        <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">DISCOS ANTERIORES</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Album 1: Emron 2014 -->
+        <a href="https://youtu.be/fB5dRlNZ0WY?si=vg1_uz6m65zF_fBl" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden">
+          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
+              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">IV</span>
+            </div>
+            <div class="relative z-10 text-center px-4">
+              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2014</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Emron</h3>
+            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
+          </div>
+        </a>
+
+        <!-- Album 2: Ícaro 2016 -->
+        <a href="https://youtu.be/rOWRXRrzGKA?si=2Uy5A14ZIKiwbom8" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden">
+          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
+              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">VI</span>
+            </div>
+            <div class="relative z-10 text-center px-4">
+              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2016</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Ícaro</h3>
+            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
+          </div>
+        </a>
+
+        <!-- Album 3: Inmaculada 2019 -->
+        <a href="https://youtu.be/7B2t8qN57Nw?si=XEST7HTgGnVrWHm-" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden">
+          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
+              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">IX</span>
+            </div>
+            <div class="relative z-10 text-center px-4">
+              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2019</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Inmaculada</h3>
+            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
+          </div>
+        </a>
+
+        <!-- Album 4: Si no Vuelvo 2022 -->
+        <a href="https://youtu.be/EK9QesfSsmo?si=hoLedbrBkjyPGk6l" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden">
+          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
+              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">XX</span>
+            </div>
+            <div class="relative z-10 text-center px-4">
+              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2022</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Si no Vuelvo</h3>
+            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
+          </div>
+        </a>
+
+        <!-- Album 5: Demonas 2024 -->
+        <a href="https://youtu.be/aHdI7w7_S7o?si=u0CUZVMaEyqqx2gm" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden lg:col-span-2">
+          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
+              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">XXIV</span>
+            </div>
+            <div class="relative z-10 text-center px-4">
+              <span class="font-label-md text-label-md text-primary-container uppercase tracking-widest block">2024 — ÚLTIMO</span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Demonas</h3>
+            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
+          </div>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Gallery Preview -->
-  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low">
+  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
     <div class="text-center mb-16">
       <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">CRÓNICAS</span>
       <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">RITUALES VISUALES</h2>
@@ -181,27 +318,6 @@
           <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Cinemático</h3>
         </div>
       </a>
-      <a href="galeria.html" class="group overflow-hidden border-t-4 border-outline-variant hover:border-primary transition-colors">
-        <img src="images/inm-32-eclipse.png" alt="Eclipse ritual" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300">
-        <div class="p-4">
-          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">04</span>
-          <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Eclipse</h3>
-        </div>
-      </a>
-      <a href="galeria.html" class="group overflow-hidden border-t-4 border-outline-variant hover:border-primary transition-colors">
-        <img src="images/inm-28-aggressive.png" alt="Aggressive intensity" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300">
-        <div class="p-4">
-          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">05</span>
-          <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Intensidad</h3>
-        </div>
-      </a>
-      <a href="galeria.html" class="group overflow-hidden border-t-4 border-outline-variant hover:border-primary transition-colors">
-        <img src="images/inm-23-giger.png" alt="Giger nightmare" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300">
-        <div class="p-4">
-          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">06</span>
-          <h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-1">Pesadilla</h3>
-        </div>
-      </a>
     </div>
   </section>
 
@@ -209,7 +325,7 @@
   <footer class="py-12 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest border-t border-outline-variant">
     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
       <img src="images/logo-baal-blanco.png" alt="BAAL" class="h-8 object-contain">
-      <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">© 2026 BAAL — Todos los derechos reservados</p>
+      <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">&copy; 2026 BAAL — Todos los derechos reservados</p>
       <div class="flex gap-6">
         <a href="https://www.instagram.com/" class="text-on-surface-variant hover:text-primary" target="_blank" rel="noopener">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -228,6 +344,12 @@
     document.getElementById('menuBtn').addEventListener('click', function() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     });
+
+    function loadVideo(videoId, trackName) {
+      var player = document.getElementById('mainPlayer');
+      player.src = 'https://www.youtube.com/embed/' + videoId + '?rel=0&modestbranding=1&autoplay=1';
+      player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   </script>
 </body>
 </html>
