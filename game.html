@@ -100,12 +100,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const LEVELS=[
-  {name:'NOVA LUX',num:'I',dur:84.288,audio:'audio/nova-lux.mp3',fog:0x0a0800,fogD:.02,light:0xe6c364,lightI:1.2,wallTex:'images/inm-23-giger.png',ground:0x0a0800,sky:0x060500,enemyCol:0xccaa44,enemyGlow:0xffcc00},
-  {name:'INMUTABLE',num:'II',dur:170.040,audio:'audio/inmutable.mp3',fog:0x130000,fogD:.025,light:0xff4444,lightI:1.0,wallTex:'images/inm-13-hero-drummer.png',ground:0x1a0000,sky:0x0a0000,enemyCol:0xff2222,enemyGlow:0xff0000},
-  {name:'CHIE UMBRA',num:'III',dur:180.120,audio:'audio/chie-umbra.mp3',fog:0x080015,fogD:.03,light:0x9955cc,lightI:.7,wallTex:'images/inm-16-hero-split.png',ground:0x060010,sky:0x030008,enemyCol:0x7733aa,enemyGlow:0x9944ff},
-  {name:'HASTA LA MUERTE INVICTO',num:'IV',dur:159.960,audio:'audio/hasta-la-muerte-invicto.mp3',fog:0x0d0d0d,fogD:.018,light:0xff3300,lightI:1.1,wallTex:'images/inm-24-cinematic.png',ground:0x0d0808,sky:0x080505,enemyCol:0xff6644,enemyGlow:0xff2200},
-  {name:'MIL PASOS',num:'V',dur:184.272,audio:'audio/mil-pasos.mp3',fog:0x1a1408,fogD:.013,light:0xddaa44,lightI:1.3,wallTex:'images/inm-28-aggressive.png',ground:0x1a1408,sky:0x0f0a02,enemyCol:0xddaa33,enemyGlow:0xffdd77},
-  {name:'ATLAS',num:'VI',dur:162.648,audio:'audio/atlas.mp3',fog:0x050818,fogD:.016,light:0x6688cc,lightI:1.0,wallTex:'images/inm-32-eclipse.png',ground:0x050810,sky:0x020510,enemyCol:0x4477bb,enemyGlow:0x6699ff}
+  {name:'NOVA LUX',num:'I',dur:84.288,audio:'audio/nova-lux.mp3',fog:0x1a1500,fogD:.012,light:0xe6c364,lightI:1.2,wallTex:'images/inm-23-giger.png',ground:0x1a1500,sky:0x151005,enemyCol:0xccaa44,enemyGlow:0xffcc00},
+  {name:'INMUTABLE',num:'II',dur:170.040,audio:'audio/inmutable.mp3',fog:0x1a0505,fogD:.014,light:0xff4444,lightI:1.0,wallTex:'images/inm-13-hero-drummer.png',ground:0x200808,sky:0x180505,enemyCol:0xff2222,enemyGlow:0xff0000},
+  {name:'CHIE UMBRA',num:'III',dur:180.120,audio:'audio/chie-umbra.mp3',fog:0x0a0520,fogD:.016,light:0x9955cc,lightI:.7,wallTex:'images/inm-16-hero-split.png',ground:0x100818,sky:0x0a0515,enemyCol:0x7733aa,enemyGlow:0x9944ff},
+  {name:'HASTA LA MUERTE INVICTO',num:'IV',dur:159.960,audio:'audio/hasta-la-muerte-invicto.mp3',fog:0x151515,fogD:.010,light:0xff3300,lightI:1.1,wallTex:'images/inm-24-cinematic.png',ground:0x180a0a,sky:0x120808,enemyCol:0xff6644,enemyGlow:0xff2200},
+  {name:'MIL PASOS',num:'V',dur:184.272,audio:'audio/mil-pasos.mp3',fog:0x1a1508,fogD:.008,light:0xddaa44,lightI:1.3,wallTex:'images/inm-28-aggressive.png',ground:0x201508,sky:0x180e05,enemyCol:0xddaa33,enemyGlow:0xffdd77},
+  {name:'ATLAS',num:'VI',dur:162.648,audio:'audio/atlas.mp3',fog:0x080a20,fogD:.009,light:0x6688cc,lightI:1.0,wallTex:'images/inm-32-eclipse.png',ground:0x0a1020,sky:0x060818,enemyCol:0x4477bb,enemyGlow:0x6699ff}
 ];
 
 const W=18,MH=5,PH=1.65,SPD=7,LOOK=0.002,SHOOT_CD=0.18,BULLET_SPD=50,ENEMY_SPD=2.2,ENEMY_ATK_R=2.5,ENEMY_ATK_CD=1.8,ENEMY_HP=3,KILLS_NEEDED=5;
@@ -254,27 +254,37 @@ function loadLevel(idx){
   walls=[];enemies=[];bullets=[];torchLights=[];
   kills=0;hp=100;shootCD=0;lvlTime=0;
 
+  // Re-add camera with flashlight (cleared above)
+  // Remove old flashlight children from camera
+  while(cam.children.length>0)cam.remove(cam.children[0]);
+  const flashlight=new THREE.SpotLight(0xffeedd,isMobile?2.5:1.8,W*4,Math.PI/4,.5,1);
+  flashlight.position.set(0,0,0);
+  flashlight.target.position.set(0,0,-1);
+  cam.add(flashlight);cam.add(flashlight.target);
+  scene.add(cam);
+
   $('lvlTag').textContent='PUERTA '+lv.num;
   $('lvlName').textContent=lv.name;
   $('killsCount').textContent='0';
   $('hpBar').style.width='100%';
   $('progBar').style.width='0%';
 
-  scene.fog=new THREE.FogExp2(lv.fog,lv.fogD);
+  scene.fog=new THREE.FogExp2(lv.fog,isMobile?lv.fogD*.6:lv.fogD);
   scene.background=new THREE.Color(lv.sky);
-  scene.add(new THREE.AmbientLight(0x111111,.5));
-  scene.add(new THREE.HemisphereLight(lv.light,0x080808,.3));
+  // Bright lighting for mobile visibility
+  scene.add(new THREE.AmbientLight(0xffffff,isMobile?.6:.35));
+  scene.add(new THREE.HemisphereLight(lv.light,0x222222,isMobile?.8:.4));
 
   const maze=genMaze(MH,MH);
   const mw=maze[0].length,mh=maze.length;
 
   const wTex=new THREE.TextureLoader().load(lv.wallTex);
   wTex.wrapS=wTex.wrapT=THREE.RepeatWrapping;
-  const wallMat=new THREE.MeshStandardMaterial({map:wTex,roughness:.9,metalness:0,color:new THREE.Color(lv.light).multiplyScalar(.3)});
+  const wallMat=new THREE.MeshStandardMaterial({map:wTex,roughness:.85,metalness:.05,color:new THREE.Color(lv.light).multiplyScalar(.6)});
   const wallGeo=new THREE.BoxGeometry(W,W*.8,W);
 
   const floorGeo=new THREE.PlaneGeometry(mw*W,mh*W);
-  const floorMat=new THREE.MeshStandardMaterial({color:lv.ground,roughness:.95});
+  const floorMat=new THREE.MeshStandardMaterial({color:lv.ground,roughness:.9,metalness:.1});
   const floor=new THREE.Mesh(floorGeo,floorMat);floor.rotation.x=-Math.PI/2;floor.position.set(mw*W/2,0,mh*W/2);scene.add(floor);
   const ceil=new THREE.Mesh(floorGeo.clone(),new THREE.MeshStandardMaterial({color:0x060606,roughness:1}));ceil.rotation.x=Math.PI/2;ceil.position.set(mw*W/2,W*.8,mh*W/2);scene.add(ceil);
 
