@@ -13,53 +13,27 @@
       theme: {
         extend: {
           colors: {
-            'surface': '#131313',
-            'surface-dim': '#131313',
-            'surface-bright': '#3a3939',
-            'surface-container-lowest': '#0e0e0e',
-            'surface-container-low': '#1c1b1b',
-            'surface-container': '#201f1f',
-            'surface-container-high': '#2a2a2a',
-            'surface-container-highest': '#353534',
-            'on-surface': '#e5e2e1',
-            'on-surface-variant': '#e3beb8',
-            'inverse-surface': '#e5e2e1',
-            'inverse-on-surface': '#313030',
-            'outline': '#aa8984',
-            'outline-variant': '#5a403c',
-            'surface-tint': '#ffb4a8',
-            'primary': '#ffb4a8',
-            'on-primary': '#690000',
-            'primary-container': '#8b0000',
-            'on-primary-container': '#ff907f',
-            'inverse-primary': '#b52619',
-            'secondary': '#e6c364',
-            'on-secondary': '#3d2e00',
-            'secondary-container': '#785d00',
-            'on-secondary-container': '#fdd977',
-            'tertiary': '#cdc6b6',
-            'on-tertiary': '#343025',
-            'tertiary-container': '#464236',
-            'on-tertiary-container': '#b5ae9f',
-            'error': '#ffb4ab',
-            'on-error': '#690005',
-            'error-container': '#93000a',
-            'on-error-container': '#ffdad6',
-            'background': '#131313',
-            'on-background': '#e5e2e1',
-            'surface-variant': '#353534',
+            'surface': '#131313', 'surface-dim': '#131313', 'surface-bright': '#3a3939',
+            'surface-container-lowest': '#0e0e0e', 'surface-container-low': '#1c1b1b',
+            'surface-container': '#201f1f', 'surface-container-high': '#2a2a2a',
+            'surface-container-highest': '#353534', 'on-surface': '#e5e2e1',
+            'on-surface-variant': '#e3beb8', 'inverse-surface': '#e5e2e1',
+            'inverse-on-surface': '#313030', 'outline': '#aa8984', 'outline-variant': '#5a403c',
+            'surface-tint': '#ffb4a8', 'primary': '#ffb4a8', 'on-primary': '#690000',
+            'primary-container': '#8b0000', 'on-primary-container': '#ff907f',
+            'inverse-primary': '#b52619', 'secondary': '#e6c364', 'on-secondary': '#3d2e00',
+            'secondary-container': '#785d00', 'on-secondary-container': '#fdd977',
+            'tertiary': '#cdc6b6', 'on-tertiary': '#343025', 'tertiary-container': '#464236',
+            'on-tertiary-container': '#b5ae9f', 'error': '#ffb4ab', 'on-error': '#690005',
+            'error-container': '#93000a', 'on-error-container': '#ffdad6',
+            'background': '#131313', 'on-background': '#e5e2e1', 'surface-variant': '#353534',
           },
           fontFamily: {
             'headline': ['Anton', 'sans-serif'],
             'body': ['"Source Serif 4"', 'serif'],
             'label': ['Geist', 'sans-serif'],
           },
-          spacing: {
-            'unit': '4px',
-            'gutter': '16px',
-            'margin-mobile': '24px',
-            'margin-desktop': '64px',
-          },
+          spacing: { 'unit': '4px', 'gutter': '16px', 'margin-mobile': '24px', 'margin-desktop': '64px' },
         },
       },
     }
@@ -72,15 +46,22 @@
     .font-body-lg { font-family: 'Source Serif 4', serif; font-size: 18px; font-weight: 400; line-height: 160%; }
     .font-body-md { font-family: 'Source Serif 4', serif; font-size: 16px; font-weight: 400; line-height: 160%; }
     .font-label-md { font-family: Geist, sans-serif; font-size: 12px; font-weight: 500; line-height: 120%; letter-spacing: 0.2em; }
-    @media (max-width: 768px) {
-      .font-display-lg { font-size: 48px; }
-      .font-headline-lg { font-size: 36px; }
-    }
-    a { transition: opacity 0.15s; }
-    a:hover { opacity: 0.8; }
-    .track-active { background: rgba(139,0,0,0.15); border-left: 4px solid #8b0000; }
-    .track-active .track-num { color: #8b0000; }
-    .track-active .track-name { color: #8b0000; font-weight: bold; }
+    @media (max-width: 768px) { .font-display-lg { font-size: 48px; } .font-headline-lg { font-size: 36px; } }
+    a { transition: opacity 0.15s; } a:hover { opacity: 0.8; }
+    .track-active { background: rgba(139,0,0,0.2); }
+    .track-active .track-num { color: #ff907f !important; }
+    .track-active .track-name { color: #8b0000 !important; }
+    .progress-bar { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: #353534; border-radius: 2px; outline: none; cursor: pointer; }
+    .progress-bar::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; background: #8b0000; border-radius: 50%; cursor: pointer; }
+    .progress-bar::-moz-range-thumb { width: 14px; height: 14px; background: #8b0000; border-radius: 50%; cursor: pointer; border: none; }
+    .progress-bar::-webkit-slider-runnable-track { background: linear-gradient(to right, #8b0000 var(--progress, 0%), #353534 var(--progress, 0%)); border-radius: 2px; }
+    .progress-bar::-moz-range-progress { background: #8b0000; border-radius: 2px; }
+    .vinyl-spin { animation: spin 3s linear infinite paused; }
+    .vinyl-spin.playing { animation-play-state: running; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .album-cover-overlay { position: relative; overflow: hidden; }
+    .album-cover-overlay::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(139,0,0,0) 0%, rgba(19,19,19,0.7) 100%); }
+    .album-cover-overlay:hover::after { background: linear-gradient(to bottom, rgba(139,0,0,0.2) 0%, rgba(19,19,19,0.3) 100%); }
   </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen">
@@ -101,7 +82,6 @@
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
-    <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden md:hidden px-margin-mobile pb-4 space-y-3">
       <a href="index.html" class="block font-headline-md text-headline-md text-primary uppercase tracking-widest">Home</a>
       <a href="album.html" class="block font-headline-md text-headline-md text-on-surface-variant uppercase tracking-widest">Chie Umbra</a>
@@ -126,66 +106,84 @@
     </div>
   </section>
 
-  <!-- YouTube Player Section -->
-  <section id="player" class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
+  <!-- Audio Player -->
+  <section id="player" class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest sticky top-0 z-40 border-b border-outline-variant hidden" id="stickyPlayer">
     <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-12">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-16 h-16 bg-surface-container rounded overflow-hidden shrink-0">
+          <img id="playerCover" src="images/discs/chie-umbra.jpg" alt="Now playing" class="w-full h-full object-cover">
+        </div>
+        <div class="flex-1 min-w-0">
+          <p id="playerTitle" class="font-headline-md text-headline-md text-on-surface uppercase truncate">NOVA LUX</p>
+          <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">BAAL — Chie Umbra</p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <button onclick="prevTrack()" class="text-on-surface-variant hover:text-primary transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+          </button>
+          <button id="playPauseBtn" onclick="togglePlay()" class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+            <svg id="playIcon" class="w-6 h-6 text-on-primary-container" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pauseIcon" class="w-6 h-6 text-on-primary-container hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <button onclick="nextTrack()" class="text-on-surface-variant hover:text-primary transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="currentTime" class="font-label-md text-label-md text-on-surface-variant tabular-nums w-12 text-right">0:00</span>
+        <input type="range" id="progressBar" class="progress-bar flex-1" min="0" max="1000" value="0" oninput="seekAudio(this.value)">
+        <span id="totalTime" class="font-label-md text-label-md text-on-surface-variant tabular-nums w-12">0:00</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tracklist Player Section -->
+  <section id="tracklist" class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
         <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-4">CHIE UMBRA — 2026</span>
         <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">REPRODUCTOR</h2>
       </div>
 
-      <!-- Main Video Player -->
-      <div class="aspect-video mb-12 border-2 border-outline-variant">
-        <iframe id="mainPlayer" class="w-full h-full" src="https://www.youtube.com/embed/7uQvfM4pwpA?rel=0&modestbranding=1" title="BAAL — Chie Umbra" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-
-      <!-- Tracklist = Clickable YouTube links -->
-      <div class="mb-8">
-        <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-6">CANCIONES</span>
-      </div>
+      <!-- Tracklist -->
       <div class="border-t border-outline-variant">
-        <!-- Track 1: Nova Lux -->
-        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Nova Lux')">
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors px-4 cursor-pointer group" onclick="playTrack(0)">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8 track-num">01</span>
             <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Nova Lux</span>
           </div>
           <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 2: Inmutable -->
-        <div class="flex items-center justify-between py-5 border-b border-[#8b0000] bg-[#8b0000]/10 hover:bg-[#8b0000]/20 transition-colors cursor-pointer px-4 group track-active" onclick="loadVideo('7uQvfM4pwpA', 'Inmutable')">
+        <div class="flex items-center justify-between py-5 border-b border-[#8b0000] bg-[#8b0000]/10 hover:bg-[#8b0000]/20 transition-colors px-4 cursor-pointer group track-active" onclick="playTrack(1)">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md w-8 track-num">02</span>
             <span class="font-headline-md text-headline-md uppercase track-name">Inmutable</span>
           </div>
-          <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="w-5 h-5 group-hover:scale-110 transition-transform" style="color:#8b0000" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 3: Chie Umbra -->
-        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Chie Umbra')">
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors px-4 cursor-pointer group" onclick="playTrack(2)">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8 track-num">03</span>
             <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Chie Umbra</span>
           </div>
           <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 4: Hasta la Muerte Invicto -->
-        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Hasta la Muerte Invicto')">
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors px-4 cursor-pointer group" onclick="playTrack(3)">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8 track-num">04</span>
             <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Hasta la Muerte Invicto</span>
           </div>
           <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 5: Mil Pasos -->
-        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Mil Pasos')">
+        <div class="flex items-center justify-between py-5 border-b border-outline-variant hover:bg-surface-container transition-colors px-4 cursor-pointer group" onclick="playTrack(4)">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8 track-num">05</span>
             <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Mil Pasos</span>
           </div>
           <svg class="w-5 h-5 text-primary-container group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <!-- Track 6: Atlas -->
-        <div class="flex items-center justify-between py-5 border-b-4 border-secondary hover:bg-surface-container transition-colors cursor-pointer px-4 group" onclick="loadVideo('7uQvfM4pwpA', 'Atlas')">
+        <div class="flex items-center justify-between py-5 border-b-4 border-secondary hover:bg-surface-container transition-colors px-4 cursor-pointer group" onclick="playTrack(5)">
           <div class="flex items-center gap-6">
             <span class="font-label-md text-label-md text-secondary w-8 track-num">06</span>
             <span class="font-headline-md text-headline-md text-on-surface uppercase track-name">Atlas</span>
@@ -194,11 +192,11 @@
         </div>
       </div>
 
-      <p class="font-body-lg text-on-surface-variant text-center mt-8 italic">Toca una canción para reproducir el video oficial</p>
+      <p class="font-body-lg text-on-surface-variant text-center mt-8 italic">Toca una canción para reproducir</p>
     </div>
   </section>
 
-  <!-- Other Albums / Discography -->
+  <!-- Discography -->
   <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
@@ -206,85 +204,51 @@
         <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface tracking-widest">DISCOS ANTERIORES</h2>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Album 1: Emron 2014 -->
-        <a href="https://youtu.be/fB5dRlNZ0WY?si=vg1_uz6m65zF_fBl" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden">
-          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
-            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
-              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">IV</span>
-            </div>
-            <div class="relative z-10 text-center px-4">
-              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2014</span>
-            </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+        <!-- Emron 2014 -->
+        <a href="https://youtu.be/fB5dRlNZ0WY?si=vg1_uz6m65zF_fBl" target="_blank" rel="noopener" class="group block">
+          <div class="album-cover-overlay aspect-square bg-surface-container rounded overflow-hidden mb-3">
+            <img src="images/discs/emron.jpg" alt="Emron" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
-          <div class="p-4">
-            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Emron</h3>
-            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
-          </div>
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2014</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors text-lg">Emron</h3>
         </a>
 
-        <!-- Album 2: Ícaro 2016 -->
-        <a href="https://youtu.be/rOWRXRrzGKA?si=2Uy5A14ZIKiwbom8" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden">
-          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
-            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
-              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">VI</span>
-            </div>
-            <div class="relative z-10 text-center px-4">
-              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2016</span>
-            </div>
+        <!-- Icaro 2016 -->
+        <a href="https://youtu.be/rOWRXRrzGKA?si=2Uy5A14ZIKiwbom8" target="_blank" rel="noopener" class="group block">
+          <div class="album-cover-overlay aspect-square bg-surface-container rounded overflow-hidden mb-3">
+            <img src="images/discs/icaro.jpg" alt="Icaro" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
-          <div class="p-4">
-            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Ícaro</h3>
-            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
-          </div>
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2016</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors text-lg">Ícaro</h3>
         </a>
 
-        <!-- Album 3: Inmaculada 2019 -->
-        <a href="https://youtu.be/7B2t8qN57Nw?si=XEST7HTgGnVrWHm-" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden">
-          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
-            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
-              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">IX</span>
-            </div>
-            <div class="relative z-10 text-center px-4">
-              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2019</span>
-            </div>
+        <!-- Inmaculada 2019 -->
+        <a href="https://youtu.be/7B2t8qN57Nw?si=XEST7HTgGnVrWHm-" target="_blank" rel="noopener" class="group block">
+          <div class="album-cover-overlay aspect-square bg-surface-container rounded overflow-hidden mb-3">
+            <img src="images/discs/inmaculada.jpg" alt="Inmaculada" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
-          <div class="p-4">
-            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Inmaculada</h3>
-            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
-          </div>
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2019</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors text-lg">Inmaculada</h3>
         </a>
 
-        <!-- Album 4: Si no Vuelvo 2022 -->
-        <a href="https://youtu.be/EK9QesfSsmo?si=hoLedbrBkjyPGk6l" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden">
-          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
-            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
-              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">XX</span>
-            </div>
-            <div class="relative z-10 text-center px-4">
-              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2022</span>
-            </div>
+        <!-- Si no Vuelvo 2022 -->
+        <a href="https://youtu.be/EK9QesfSsmo?si=hoLedbrBkjyPGk6l" target="_blank" rel="noopener" class="group block">
+          <div class="album-cover-overlay aspect-square bg-surface-container rounded overflow-hidden mb-3">
+            <img src="images/discs/si-no-vuelvo.jpg" alt="Si no Vuelvo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
-          <div class="p-4">
-            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Si no Vuelvo</h3>
-            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
-          </div>
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block">2022</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors text-lg">Si no Vuelvo</h3>
         </a>
 
-        <!-- Album 5: Demonas 2024 -->
-        <a href="https://youtu.be/aHdI7w7_S7o?si=u0CUZVMaEyqqx2gm" target="_blank" rel="noopener" class="group block border border-outline-variant hover:border-primary transition-colors overflow-hidden lg:col-span-2">
-          <div class="aspect-square bg-surface-container-high flex items-center justify-center relative overflow-hidden">
-            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300 bg-surface-container flex items-center justify-center">
-              <span class="font-display-lg text-on-surface/10 group-hover:text-primary/30 transition-colors text-[120px]">XXIV</span>
-            </div>
-            <div class="relative z-10 text-center px-4">
-              <span class="font-label-md text-label-md text-primary-container uppercase tracking-widest block">2024 — ÚLTIMO</span>
-            </div>
+        <!-- Demonas 2024 -->
+        <a href="https://youtu.be/aHdI7w7_S7o?si=u0CUZVMaEyqqx2gm" target="_blank" rel="noopener" class="group block relative">
+          <div class="album-cover-overlay aspect-square bg-surface-container rounded overflow-hidden mb-3">
+            <img src="images/discs/demonas.jpg" alt="Demonas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
-          <div class="p-4">
-            <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors">Demonas</h3>
-            <p class="font-body-md text-on-surface-variant mt-1">En Nombre de Baal</p>
-          </div>
+          <span class="font-label-md text-label-md text-primary-container uppercase tracking-widest block">2024</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface uppercase group-hover:text-primary transition-colors text-lg">Demonas</h3>
+          <span class="absolute top-2 right-2 bg-primary-container text-on-primary-container font-label-md text-label-md px-2 py-1 uppercase tracking-wider rounded">Último</span>
         </a>
       </div>
     </div>
@@ -340,16 +304,114 @@
     </div>
   </footer>
 
+  <!-- Audio Player Script -->
+  <audio id="audioPlayer" preload="auto">
+    <source src="audio/nova-lux.mp3" type="audio/mpeg">
+    <source src="audio/inmutable.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
+    // Mobile menu
     document.getElementById('menuBtn').addEventListener('click', function() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     });
 
-    function loadVideo(videoId, trackName) {
-      var player = document.getElementById('mainPlayer');
-      player.src = 'https://www.youtube.com/embed/' + videoId + '?rel=0&modestbranding=1&autoplay=1';
-      player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Audio player
+    const tracks = [
+      { title: 'Nova Lux', file: 'audio/nova-lux.mp3' },
+      { title: 'Inmutable', file: 'audio/inmutable.mp3' },
+      { title: 'Chie Umbra', file: 'audio/chie-umbra.mp3' },
+      { title: 'Hasta la Muerte Invicto', file: 'audio/hasta-la-muerte-invicto.mp3' },
+      { title: 'Mil Pasos', file: 'audio/mil-pasos.mp3' },
+      { title: 'Atlas', file: 'audio/atlas.mp3' }
+    ];
+
+    const covers = [
+      'images/discs/chie-umbra.jpg',
+      'images/discs/chie-umbra.jpg',
+      'images/discs/chie-umbra.jpg',
+      'images/discs/chie-umbra.jpg',
+      'images/discs/chie-umbra.jpg',
+      'images/discs/chie-umbra.jpg'
+    ];
+
+    let currentTrack = 0;
+    let isPlaying = false;
+    const audio = document.getElementById('audioPlayer');
+    const playerSection = document.getElementById('player');
+    const progressBar = document.getElementById('progressBar');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const playerTitle = document.getElementById('playerTitle');
+    const playerCover = document.getElementById('playerCover');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+
+    function formatTime(s) {
+      if (isNaN(s)) return '0:00';
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
     }
+
+    function playTrack(index) {
+      currentTrack = index;
+      audio.src = tracks[index].file;
+      playerTitle.textContent = tracks[index].title.toUpperCase();
+      playerCover.src = covers[index];
+      playerSection.classList.remove('hidden');
+      audio.play().then(() => {
+        isPlaying = true;
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+      }).catch(e => console.log('Play blocked:', e));
+      document.getElementById('tracklist').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function togglePlay() {
+      if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+      } else {
+        audio.play().then(() => {
+          isPlaying = true;
+          playIcon.classList.add('hidden');
+          pauseIcon.classList.remove('hidden');
+        }).catch(e => console.log('Play blocked:', e));
+      }
+    }
+
+    function nextTrack() {
+      playTrack((currentTrack + 1) % tracks.length);
+    }
+
+    function prevTrack() {
+      playTrack((currentTrack - 1 + tracks.length) % tracks.length);
+    }
+
+    function seekAudio(value) {
+      if (audio.duration) {
+        audio.currentTime = (value / 1000) * audio.duration;
+      }
+    }
+
+    audio.addEventListener('timeupdate', function() {
+      if (audio.duration) {
+        progressBar.value = (audio.currentTime / audio.duration) * 1000;
+        progressBar.style.setProperty('--progress', ((audio.currentTime / audio.duration) * 100) + '%');
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+      }
+    });
+
+    audio.addEventListener('loadedmetadata', function() {
+      totalTimeEl.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('ended', function() {
+      nextTrack();
+    });
   </script>
 </body>
 </html>
